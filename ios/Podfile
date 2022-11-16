@@ -3,11 +3,9 @@ platform :ios, '14.0'
 
 target 'Runner' do
   # Comment the next line if you don't want to use dynamic frameworks
-  pod 'Firebase', '>= 2.5.1'
-  pod ‘Firebase/Auth’
-  pod ‘Google/SignIn’
-  pod ‘Firebase/Database’
-  pod 'Firebase/Storage' end
+  use_frameworks!
+pod ‘Firebase/Analytics
+
   # Pods for Runner
 
 end
