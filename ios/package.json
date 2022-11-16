@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "pod-install": "^0.1.38"
+  }
+}
