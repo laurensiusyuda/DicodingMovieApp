@@ -25,6 +25,8 @@ class MovieRepositoryImpl implements MovieRepository {
       return Right(result.map((model) => model.toEntity()).toList());
     } on ServerException {
       return Left(ServerFailure(''));
+    } on TlsException {
+      return Left(SslFailure('CERTIFICATE_VERIFY_FAILED'));
     } on SocketException {
       return Left(ConnectionFailure('Failed to connect to the network'));
     }
@@ -37,6 +39,8 @@ class MovieRepositoryImpl implements MovieRepository {
       return Right(result.toEntity());
     } on ServerException {
       return Left(ServerFailure(''));
+    } on TlsException {
+      return Left(SslFailure('CERTIFICATE_VERIFY_FAILED'));
     } on SocketException {
       return Left(ConnectionFailure('Failed to connect to the network'));
     }
@@ -49,6 +53,8 @@ class MovieRepositoryImpl implements MovieRepository {
       return Right(result.map((model) => model.toEntity()).toList());
     } on ServerException {
       return Left(ServerFailure(''));
+    } on TlsException {
+      return Left(SslFailure('CERTIFICATE_VERIFY_FAILED'));
     } on SocketException {
       return Left(ConnectionFailure('Failed to connect to the network'));
     }
@@ -61,6 +67,8 @@ class MovieRepositoryImpl implements MovieRepository {
       return Right(result.map((model) => model.toEntity()).toList());
     } on ServerException {
       return Left(ServerFailure(''));
+    } on TlsException {
+      return Left(SslFailure('CERTIFICATE_VERIFY_FAILED'));
     } on SocketException {
       return Left(ConnectionFailure('Failed to connect to the network'));
     }
@@ -73,6 +81,8 @@ class MovieRepositoryImpl implements MovieRepository {
       return Right(result.map((model) => model.toEntity()).toList());
     } on ServerException {
       return Left(ServerFailure(''));
+    } on TlsException {
+      return Left(SslFailure('CERTIFICATE_VERIFY_FAILED'));
     } on SocketException {
       return Left(ConnectionFailure('Failed to connect to the network'));
     }
@@ -85,6 +95,8 @@ class MovieRepositoryImpl implements MovieRepository {
       return Right(result.map((model) => model.toEntity()).toList());
     } on ServerException {
       return Left(ServerFailure(''));
+    } on TlsException {
+      return Left(SslFailure('CERTIFICATE_VERIFY_FAILED'));
     } on SocketException {
       return Left(ConnectionFailure('Failed to connect to the network'));
     }
