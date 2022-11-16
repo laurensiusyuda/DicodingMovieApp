@@ -1,5 +1,6 @@
 import 'package:core/core.dart';
 import 'package:about/about_page.dart';
+import 'package:ditonton/firebase_options.dart';
 
 // Bloc movie
 import 'package:ditonton/presentation/bloc/movie/movie_detail/movie_detail_bloc.dart';
@@ -42,7 +43,9 @@ import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   di.init();
   runApp(MyApp());
 }
