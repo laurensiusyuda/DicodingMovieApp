@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:ditonton/domain/usecases_tv/search_tv.dart';
+import 'package:ditonton/domain/usecases/usecases_tv/search_tv.dart';
 import 'package:ditonton/presentation/bloc/tv/tv_search/tv_search_event.dart';
 import 'package:ditonton/presentation/bloc/tv/tv_search/tv_search_state.dart';
 

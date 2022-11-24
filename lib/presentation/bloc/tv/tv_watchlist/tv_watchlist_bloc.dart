@@ -1,9 +1,9 @@
 import 'package:bloc/bloc.dart';
 
-import 'package:ditonton/domain/usecases_tv/get_watchlist_status.dart';
-import 'package:ditonton/domain/usecases_tv/get_watchlist_tv.dart';
-import 'package:ditonton/domain/usecases_tv/remove_watchlist.dart';
-import 'package:ditonton/domain/usecases_tv/save_watchlist.dart';
+import 'package:ditonton/domain/usecases/usecases_tv/get_watchlist_status.dart';
+import 'package:ditonton/domain/usecases/usecases_tv/get_watchlist_tv.dart';
+import 'package:ditonton/domain/usecases/usecases_tv/remove_watchlist.dart';
+import 'package:ditonton/domain/usecases/usecases_tv/save_watchlist.dart';
 
 import 'package:ditonton/presentation/bloc/tv/tv_watchlist/tv_watchlist_event.dart';
 import 'package:ditonton/presentation/bloc/tv/tv_watchlist/tv_watchlist_state.dart';

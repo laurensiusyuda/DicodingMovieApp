@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:ditonton/domain/usecases/get_top_rated_movies.dart';
+import 'package:ditonton/domain/usecases/usecases_movie/get_top_rated_movies.dart';
 import 'package:ditonton/presentation/bloc/movie/top_rated_movie/top_rated_movie_event.dart';
 import 'package:ditonton/presentation/bloc/movie/top_rated_movie/top_rated_movie_state.dart';
 

@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:ditonton/domain/entities/tv.dart';
+import 'package:ditonton/domain/entities/tv_entities/tv.dart';
 
 abstract class RecommendationTvState extends Equatable {
   const RecommendationTvState();

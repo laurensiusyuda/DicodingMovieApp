@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:ditonton/domain/entities/tv.dart';
-import 'package:ditonton/domain/entities/tv_detail.dart';
+import 'package:ditonton/domain/entities/tv_entities/tv.dart';
+import 'package:ditonton/domain/entities/tv_entities/tv_detail.dart';
 import 'package:core/core.dart';
 
 abstract class TvRepository {
@@ -10,8 +10,8 @@ abstract class TvRepository {
   Future<Either<Failure, TvDetail>> getTvDetail(int id);
   Future<Either<Failure, List<Tv>>> getTvRecommendations(int id);
   Future<Either<Failure, List<Tv>>> searchTv(String query);
+  Future<Either<Failure, List<Tv>>> getWatchlistTv();
   Future<Either<Failure, String>> saveWatchlistTv(TvDetail tv);
   Future<Either<Failure, String>> removeWatchlistTv(TvDetail tv);
   Future<bool> isAddedToWatchlistTv(int id);
-  Future<Either<Failure, List<Tv>>> getWatchlistTv();
 }

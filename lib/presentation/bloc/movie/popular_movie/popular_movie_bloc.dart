@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:ditonton/domain/usecases/get_popular_movies.dart';
+import 'package:ditonton/domain/usecases/usecases_movie/get_popular_movies.dart';
 import 'package:ditonton/presentation/bloc/movie/popular_movie/popular_movie_event.dart';
 import 'package:ditonton/presentation/bloc/movie/popular_movie/popular_movie_state.dart';
 

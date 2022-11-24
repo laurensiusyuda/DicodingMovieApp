@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:ditonton/domain/usecases_tv/get_now_playing_tv.dart';
+import 'package:ditonton/domain/usecases/usecases_tv/get_now_playing_tv.dart';
 
 import 'package:ditonton/presentation/bloc/tv/tv_now_playing/tv_now_playing_event.dart';
 import 'package:ditonton/presentation/bloc/tv/tv_now_playing/tv_now_playing_state.dart';

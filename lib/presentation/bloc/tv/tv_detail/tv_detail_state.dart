@@ -1,31 +1,39 @@
 import 'package:equatable/equatable.dart';
-import 'package:ditonton/domain/entities/tv_detail.dart';
 
-abstract class DetailTvState extends Equatable {
-  const DetailTvState();
-
+abstract class DetailTvSeriesState extends Equatable {
+  const DetailTvSeriesState();
   @override
   List<Object> get props => [];
 }
 
-class DetailTvEmpty extends DetailTvState {}
+class StateTvSeriesDetailInitial extends DetailTvSeriesState {}
 
-class DetailTvLoading extends DetailTvState {}
+class StateTvSeriesDetailLoading extends DetailTvSeriesState {}
 
-class DetailTvError extends DetailTvState {
+class StateTvSeriesDetailLoaded extends DetailTvSeriesState {}
+
+class StateWatchlistTvSeriesFailure extends DetailTvSeriesState {
   final String message;
+  const StateWatchlistTvSeriesFailure(this.message);
+}
 
-  const DetailTvError(this.message);
-
+class StateWatchlistTvSeriesSuccess extends DetailTvSeriesState {
+  final String message;
+  const StateWatchlistTvSeriesSuccess(this.message);
   @override
   List<Object> get props => [message];
 }
 
-class DetailTvLoaded extends DetailTvState {
-  final TvDetail result;
-
-  const DetailTvLoaded(this.result);
-
+class StateDetailTvSeriesFailure extends DetailTvSeriesState {
+  final String message;
+  const StateDetailTvSeriesFailure(this.message);
   @override
-  List<Object> get props => [result];
+  List<Object> get props => [message];
+}
+
+class StateDetailTvSeriesSuccess extends DetailTvSeriesState {
+  final String message;
+  const StateDetailTvSeriesSuccess(this.message);
+  @override
+  List<Object> get props => [message];
 }

@@ -1,4 +1,4 @@
-import 'package:ditonton/domain/entities/tv.dart';
+import 'package:ditonton/domain/entities/tv_entities/tv.dart';
 
 import 'package:ditonton/presentation/pages/tv/now_playing_tv_page.dart';
 import 'package:ditonton/presentation/pages/tv/tv_detail_page.dart';
@@ -168,7 +168,7 @@ class TvList extends StatelessWidget {
               onTap: () {
                 Navigator.pushNamed(
                   context,
-                  TvDetailPage.ROUTE_NAME,
+                  TvSeriesDetailPage.ROUTE_NAME,
                   arguments: tvs.id,
                 );
               },

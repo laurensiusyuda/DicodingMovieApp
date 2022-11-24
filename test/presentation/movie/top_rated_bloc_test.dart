@@ -2,7 +2,7 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:core/core.dart';
 import 'package:ditonton/domain/entities/movie.dart';
-import 'package:ditonton/domain/usecases/get_top_rated_movies.dart';
+import 'package:ditonton/domain/usecases/usecases_movie/get_top_rated_movies.dart';
 import 'package:ditonton/presentation/bloc/movie/top_rated_movie/top_rated_movie_bloc.dart';
 import 'package:ditonton/presentation/bloc/movie/top_rated_movie/top_rated_movie_event.dart';
 import 'package:ditonton/presentation/bloc/movie/top_rated_movie/top_rated_movie_state.dart';

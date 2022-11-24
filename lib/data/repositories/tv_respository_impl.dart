@@ -2,13 +2,13 @@ import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 
-import 'package:ditonton/data/datasources/tv_local_data_source.dart';
-import 'package:ditonton/data/datasources/tv_remote_data_source.dart';
+import 'package:ditonton/data/datasources/tv_datasources/tv_local_data_source.dart';
+import 'package:ditonton/data/datasources/tv_datasources/tv_remote_data_source.dart';
 
-import 'package:ditonton/data/models/tv_table.dart';
+import 'package:ditonton/data/models/tv_series/tv_table.dart';
 
-import 'package:ditonton/domain/entities/tv.dart';
-import 'package:ditonton/domain/entities/tv_detail.dart';
+import 'package:ditonton/domain/entities/tv_entities/tv.dart';
+import 'package:ditonton/domain/entities/tv_entities/tv_detail.dart';
 
 import 'package:ditonton/domain/repositories/tv_repository.dart';
 import 'package:core/core.dart';

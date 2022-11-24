@@ -1,12 +1,12 @@
-import 'package:ditonton/data/models/movie_table.dart';
-import 'package:ditonton/data/models/tv_table.dart';
+import 'package:ditonton/data/models/movie_models/movie_table.dart';
+import 'package:ditonton/data/models/tv_series/tv_table.dart';
 
 import 'package:ditonton/domain/entities/genre.dart';
 
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/entities/movie_detail.dart';
-import 'package:ditonton/domain/entities/tv.dart';
-import 'package:ditonton/domain/entities/tv_detail.dart';
+import 'package:ditonton/domain/entities/tv_entities/tv.dart';
+import 'package:ditonton/domain/entities/tv_entities/tv_detail.dart';
 
 final testMovie = Movie(
   adult: false,

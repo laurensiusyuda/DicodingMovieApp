@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:ditonton/domain/usecases/get_now_playing_movies.dart';
+import 'package:ditonton/domain/usecases/usecases_movie/get_now_playing_movies.dart';
 import 'package:ditonton/presentation/bloc/movie/now_movie_playing/now_movie_playing_event.dart';
 import 'package:ditonton/presentation/bloc/movie/now_movie_playing/now_movie_playing_state.dart';
 

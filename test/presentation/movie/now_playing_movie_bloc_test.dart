@@ -1,7 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:core/core.dart';
-import 'package:ditonton/domain/usecases/get_now_playing_movies.dart';
+import 'package:ditonton/domain/usecases/usecases_movie/get_now_playing_movies.dart';
 import 'package:ditonton/presentation/bloc/movie/now_movie_playing/now_movie_playing_bloc.dart';
 import 'package:ditonton/presentation/bloc/movie/now_movie_playing/now_movie_playing_state.dart';
 import 'package:ditonton/presentation/bloc/movie/now_movie_playing/now_movie_playing_event.dart';

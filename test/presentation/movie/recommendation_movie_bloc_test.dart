@@ -2,7 +2,7 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:core/core.dart';
 import 'package:ditonton/domain/entities/movie.dart';
-import 'package:ditonton/domain/usecases/get_movie_recommendations.dart';
+import 'package:ditonton/domain/usecases/usecases_movie/get_movie_recommendations.dart';
 import 'package:ditonton/presentation/bloc/movie/recomendation_movie/recomendation_movie_bloc.dart';
 import 'package:ditonton/presentation/bloc/movie/recomendation_movie/recomendation_movie_event.dart';
 import 'package:ditonton/presentation/bloc/movie/recomendation_movie/recomendation_movie_state.dart';

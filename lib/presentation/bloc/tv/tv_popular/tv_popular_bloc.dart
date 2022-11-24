@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 
-import 'package:ditonton/domain/usecases_tv/get_popular_tv.dart';
+import 'package:ditonton/domain/usecases/usecases_tv/get_popular_tv.dart';
 import 'package:ditonton/presentation/bloc/tv/tv_popular/tv_popular_event.dart';
 import 'package:ditonton/presentation/bloc/tv/tv_popular/tv_popular_state.dart';
 

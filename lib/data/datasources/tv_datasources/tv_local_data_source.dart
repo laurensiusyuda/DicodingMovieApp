@@ -1,6 +1,6 @@
 import 'package:core/core.dart';
-import 'package:ditonton/data/datasources/db/database_helper_tv.dart';
-import 'package:ditonton/data/models/tv_table.dart';
+import 'package:ditonton/data/datasources/db/database_helper.dart';
+import 'package:ditonton/data/models/tv_series/tv_table.dart';
 
 abstract class TvLocalDataSource {
   Future<String> insertWatchlistTv(TvTable tv);
@@ -10,13 +10,13 @@ abstract class TvLocalDataSource {
 }
 
 class TvLocalDataSourceImpl implements TvLocalDataSource {
-  final DatabaseHelperTv databaseHelperTv;
+  final DatabaseHelper databaseHelperTv;
 
   TvLocalDataSourceImpl({required this.databaseHelperTv});
 
   @override
   Future<TvTable?> getTvById(int id) async {
-    final result = await databaseHelperTv.getTvById(id);
+    final result = await databaseHelperTv.getTvSeriesById(id);
     if (result != null) {
       return TvTable.fromMap(result);
     } else {
@@ -26,14 +26,14 @@ class TvLocalDataSourceImpl implements TvLocalDataSource {
 
   @override
   Future<List<TvTable>> getWatchlistTv() async {
-    final result = await databaseHelperTv.getWatchlistTv();
+    final result = await databaseHelperTv.getWatchlistTvSeries();
     return result.map((e) => TvTable.fromMap(e)).toList();
   }
 
   @override
   Future<String> insertWatchlistTv(TvTable tv) async {
     try {
-      await databaseHelperTv.insertWatchlistTv(tv);
+      await databaseHelperTv.insertWatchlistTvSeries(tv);
       return 'Added to Watchlist';
     } catch (e) {
       throw DatabaseException(e.toString());
@@ -43,7 +43,7 @@ class TvLocalDataSourceImpl implements TvLocalDataSource {
   @override
   Future<String> removeWatchlistTv(TvTable tv) async {
     try {
-      await databaseHelperTv.removeWatchlistTv(tv);
+      await databaseHelperTv.removeWatchlistTvSeries(tv);
       return 'Removed from Watchlist';
     } catch (e) {
       throw DatabaseException(e.toString());

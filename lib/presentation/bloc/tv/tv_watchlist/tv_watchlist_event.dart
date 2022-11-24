@@ -1,4 +1,4 @@
-import 'package:ditonton/domain/entities/tv_detail.dart';
+import 'package:ditonton/domain/entities/tv_entities/tv_detail.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class WatchlistTvEvent extends Equatable {

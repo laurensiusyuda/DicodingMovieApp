@@ -18,12 +18,13 @@ import 'package:ditonton/presentation/bloc/tv/tv_recomendation/tv_recomendation_
 import 'package:ditonton/presentation/bloc/tv/tv_search/tv_search_bloc.dart';
 import 'package:ditonton/presentation/bloc/tv/tv_top_rated/tv_top_rated_bloc.dart';
 import 'package:ditonton/presentation/bloc/tv/tv_watchlist/tv_watchlist_bloc.dart';
+import 'package:ditonton/presentation/pages/movie/home_movie_page.dart';
 
 import 'package:ditonton/presentation/pages/movie/movie_detail_page.dart';
-import 'package:ditonton/presentation/pages/movie/home_movie_page.dart';
 import 'package:ditonton/presentation/pages/movie/popular_movies_page.dart';
 import 'package:ditonton/presentation/pages/movie/search_page.dart';
 import 'package:ditonton/presentation/pages/movie/top_rated_movies_page.dart';
+import 'package:ditonton/presentation/pages/tv/home_tv_page.dart';
 import 'package:ditonton/presentation/pages/tv/now_playing_tv_page.dart';
 import 'package:ditonton/presentation/pages/movie/watchlist_movies_page.dart';
 import 'package:ditonton/presentation/pages/tv/tv_detail_page.dart';
@@ -31,7 +32,6 @@ import 'package:ditonton/presentation/pages/tv/popular_tv_page.dart';
 import 'package:ditonton/presentation/pages/tv/searchtv_page.dart';
 import 'package:ditonton/presentation/pages/tv/top_rated_tv_page.dart';
 import 'package:ditonton/presentation/pages/tv/watchlist_tv_page.dart';
-import 'package:ditonton/presentation/pages/tv/home_tv_page.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -39,11 +39,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:ditonton/injection.dart' as di;
 import 'package:firebase_core/firebase_core.dart';
+import 'package:http/io_client.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  await HttpsPinning.init();
+  IOClient getClient = await HttpsPinning.ioClient;
 
   di.init();
   runApp(MyApp());
@@ -55,7 +56,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         // Bloc Movie
-        BlocProvider(create: (_) => di.locator<DetailMovieBloc>()),
+        BlocProvider(create: (_) => di.locator<MovieDetailBloc>()),
         BlocProvider(create: (_) => di.locator<NowPlayingMovieBloc>()),
         BlocProvider(create: (_) => di.locator<PopularMovieBloc>()),
         BlocProvider(create: (_) => di.locator<RecommendationMovieBloc>()),
@@ -63,7 +64,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => di.locator<TopRatedMovieBloc>()),
         BlocProvider(create: (_) => di.locator<WatchlistMovieBloc>()),
         // Bloc Tv
-        BlocProvider(create: (_) => di.locator<DetailTvBloc>()),
+        BlocProvider(create: (_) => di.locator<TvSeriesDetailBloc>()),
         BlocProvider(create: (_) => di.locator<OnTheAirTvBloc>()),
         BlocProvider(create: (_) => di.locator<PopularTvBloc>()),
         BlocProvider(create: (_) => di.locator<RecommendationTvBloc>()),
@@ -117,10 +118,10 @@ class MyApp extends StatelessWidget {
                 builder: (_) => MovieDetailPage(id: id),
                 settings: settings,
               );
-            case TvDetailPage.ROUTE_NAME:
+            case TvSeriesDetailPage.ROUTE_NAME:
               final id = settings.arguments as int;
               return MaterialPageRoute(
-                builder: (_) => TvDetailPage(id: id),
+                builder: (_) => TvSeriesDetailPage(id: id),
               );
             case SearchPage.ROUTE_NAME:
               return CupertinoPageRoute(

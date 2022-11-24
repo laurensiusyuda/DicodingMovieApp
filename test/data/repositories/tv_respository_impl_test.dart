@@ -3,11 +3,11 @@ import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:core/core.dart';
 
-import 'package:ditonton/data/models/genre_model.dart';
-import 'package:ditonton/data/models/tv_detail_model.dart';
-import 'package:ditonton/data/models/tv_model.dart';
+import 'package:ditonton/data/models/movie_models/genre_model.dart';
+import 'package:ditonton/data/models/tv_series/tv_detail_model.dart';
+import 'package:ditonton/data/models/tv_series/tv_model.dart';
 import 'package:ditonton/data/repositories/tv_respository_impl.dart';
-import 'package:ditonton/domain/entities/tv.dart';
+import 'package:ditonton/domain/entities/tv_entities/tv.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 

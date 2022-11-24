@@ -1,17 +1,34 @@
+import 'package:ditonton/domain/entities/tv_entities/tv_detail.dart';
 import 'package:equatable/equatable.dart';
 
-abstract class DetailTvEvent extends Equatable {
-  const DetailTvEvent();
-
-  @override
-  List<Object> get props => [];
+abstract class DetailTvSeriesEvent extends Equatable {
+  const DetailTvSeriesEvent();
 }
 
-class FetchDetailTvEvent extends DetailTvEvent {
+class EventLoadDetailTvSeries extends DetailTvSeriesEvent {
   final int id;
 
-  const FetchDetailTvEvent(this.id);
+  EventLoadDetailTvSeries({required this.id});
 
-  @override
-  List<Object> get props => [id];
+  List<Object?> get props => [id];
+}
+
+class EventAddWatchlist extends DetailTvSeriesEvent {
+  final TvDetail tvSeries;
+
+  EventAddWatchlist({
+    required this.tvSeries,
+  });
+
+  List<Object?> get props => [tvSeries];
+}
+
+class EventRemoveWatchlist extends DetailTvSeriesEvent {
+  final TvDetail tvSeries;
+
+  EventRemoveWatchlist({
+    required this.tvSeries,
+  });
+
+  List<Object?> get props => [tvSeries];
 }

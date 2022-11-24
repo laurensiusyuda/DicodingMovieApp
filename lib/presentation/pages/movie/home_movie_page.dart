@@ -24,7 +24,6 @@ import 'package:ditonton/presentation/bloc/movie/top_rated_movie/top_rated_movie
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class HomeMoviePage extends StatefulWidget {

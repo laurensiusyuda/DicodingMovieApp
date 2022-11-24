@@ -1,31 +1,45 @@
-import 'package:ditonton/domain/entities/movie_detail.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class DetailMovieState extends Equatable {
   const DetailMovieState();
 
   @override
-  List<Object?> get props => [];
+  List<Object> get props => [];
 }
 
-class DetailMovieLoading extends DetailMovieState {}
+class StateMovieDetailInitial extends DetailMovieState {}
 
-class DetailMovieEmpty extends DetailMovieState {}
+class StateMovieDetailLoading extends DetailMovieState {}
 
-class DetailMovieError extends DetailMovieState {
+class StateMovieDetailLoaded extends DetailMovieState {}
+
+class StateWatchlistFailure extends DetailMovieState {
   final String message;
 
-  const DetailMovieError(this.message);
-
-  @override
-  List<Object?> get props => [message];
+  const StateWatchlistFailure(this.message);
 }
 
-class DetailMovieLoaded extends DetailMovieState {
-  final MovieDetail result;
+class StateWatchlistSuccess extends DetailMovieState {
+  final String message;
 
-  const DetailMovieLoaded(this.result);
+  const StateWatchlistSuccess(this.message);
 
   @override
-  List<Object?> get props => [result];
+  List<Object> get props => [message];
+}
+
+class StateLoadDetailMovieFailure extends DetailMovieState {
+  final String message;
+
+  StateLoadDetailMovieFailure({
+    this.message = "",
+  });
+}
+
+class StateLoadMovieRecommendationFailure extends DetailMovieState {
+  final String message;
+
+  StateLoadMovieRecommendationFailure({
+    this.message = "",
+  });
 }

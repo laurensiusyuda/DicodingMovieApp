@@ -1,10 +1,10 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:core/core.dart';
-import 'package:ditonton/domain/usecases/get_watchlist_movies.dart';
-import 'package:ditonton/domain/usecases/get_watchlist_status.dart';
-import 'package:ditonton/domain/usecases/remove_watchlist.dart';
-import 'package:ditonton/domain/usecases/save_watchlist.dart';
+import 'package:ditonton/domain/usecases/usecases_movie/get_watchlist_movies.dart';
+import 'package:ditonton/domain/usecases/usecases_movie/get_watchlist_status.dart';
+import 'package:ditonton/domain/usecases/usecases_movie/remove_watchlist.dart';
+import 'package:ditonton/domain/usecases/usecases_movie/save_watchlist.dart';
 import 'package:ditonton/presentation/bloc/movie/watchlist_movie/watchlist_movie_bloc.dart';
 import 'package:ditonton/presentation/bloc/movie/watchlist_movie/watchlist_movie_event.dart';
 import 'package:ditonton/presentation/bloc/movie/watchlist_movie/watchlist_movie_state.dart';

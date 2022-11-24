@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:ditonton/domain/usecases_tv/get_tv_recommendations.dart';
+import 'package:ditonton/domain/usecases/usecases_tv/get_tv_recommendations.dart';
 
 import 'package:ditonton/presentation/bloc/tv/tv_recomendation/tv_recomendation_event.dart';
 import 'package:ditonton/presentation/bloc/tv/tv_recomendation/tv_recomendation_state.dart';
