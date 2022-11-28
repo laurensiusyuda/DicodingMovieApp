@@ -1,14 +1,12 @@
+import 'package:core/core.dart';
+import 'package:ditonton/presentation/widgets/Tv_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'package:ditonton/presentation/widgets/tv_card_list.dart';
-
 import 'package:ditonton/presentation/bloc/tv/tv_top_rated/tv_top_rated_bloc.dart';
 import 'package:ditonton/presentation/bloc/tv/tv_top_rated/tv_top_rated_event.dart';
-import 'package:ditonton/presentation/bloc/tv/tv_top_rated/tv_top_rated_state.dart';
 
 class TopRatedTvPage extends StatefulWidget {
-  static const ROUTE_NAME = '/top-rated-tv';
+  static const routeName = '/top-rated-tv';
 
   @override
   _TopRatedTvPageState createState() => _TopRatedTvPageState();
@@ -18,7 +16,7 @@ class _TopRatedTvPageState extends State<TopRatedTvPage> {
   @override
   void initState() {
     super.initState();
-    context.read<TopRatedTvBloc>().add(FetchTopRatedTvEvent());
+    Future.microtask(() => context.read<TopRatedTvBloc>().add(TopRatedTv()));
   }
 
   @override
@@ -29,13 +27,13 @@ class _TopRatedTvPageState extends State<TopRatedTvPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: BlocBuilder<TopRatedTvBloc, TopRatedTvState>(
+        child: BlocBuilder<TopRatedTvBloc, StateRequest>(
           builder: (context, state) {
-            if (state is TopRatedTvLoading) {
+            if (state is Loading) {
               return const Center(
                 child: CircularProgressIndicator(),
               );
-            } else if (state is TopRatedTvLoaded) {
+            } else if (state is HasData) {
               return ListView.builder(
                 itemBuilder: (context, index) {
                   final tv = state.result[index];

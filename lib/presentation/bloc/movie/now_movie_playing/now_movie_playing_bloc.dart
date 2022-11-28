@@ -1,23 +1,23 @@
 import 'package:bloc/bloc.dart';
+import 'package:core/core.dart';
 import 'package:ditonton/domain/usecases/usecases_movie/get_now_playing_movies.dart';
 import 'package:ditonton/presentation/bloc/movie/now_movie_playing/now_movie_playing_event.dart';
-import 'package:ditonton/presentation/bloc/movie/now_movie_playing/now_movie_playing_state.dart';
 
-class NowPlayingMovieBloc
-    extends Bloc<NowPlayingMovieEvent, NowPlayingMovieState> {
-  final GetNowPlayingMovies getNowPlayingMovies;
+class NowPlayingMoviesBloc extends Bloc<NowPlayingEvent, StateRequest> {
+  final GetNowPlayingMovies _getNowPlayingMovies;
 
-  NowPlayingMovieBloc(this.getNowPlayingMovies)
-      : super(NowPlayingMovieEmpty()) {
-    on<FetchNowPlayingMovieEvent>((event, emit) async {
-      emit(NowPlayingMovieLoading());
-
-      final result = await getNowPlayingMovies.execute();
-      result.fold((failure) {
-        emit(NowPlayingMovieError(failure.message));
-      }, (hasData) {
-        emit(NowPlayingMovieLoaded(hasData));
-      });
+  NowPlayingMoviesBloc(this._getNowPlayingMovies) : super(Empty()) {
+    on<NowPlayingMovies>((event, emit) async {
+      emit(Loading());
+      final result = await _getNowPlayingMovies.execute();
+      result.fold(
+        (failure) {
+          emit(Error(failure.message));
+        },
+        (data) {
+          emit(HasData(data));
+        },
+      );
     });
   }
 }

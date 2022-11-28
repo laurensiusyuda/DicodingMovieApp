@@ -1,15 +1,13 @@
 import 'package:core/core.dart';
+import 'package:ditonton/presentation/widgets/Movie_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'package:ditonton/presentation/widgets/movie_card_list.dart';
-
 import 'package:ditonton/presentation/bloc/movie/watchlist_movie/watchlist_movie_bloc.dart';
 import 'package:ditonton/presentation/bloc/movie/watchlist_movie/watchlist_movie_event.dart';
-import 'package:ditonton/presentation/bloc/movie/watchlist_movie/watchlist_movie_state.dart';
 
 class WatchlistMoviesPage extends StatefulWidget {
   static const ROUTE_NAME = '/watchlist-movie';
+  const WatchlistMoviesPage({Key? key}) : super(key: key);
 
   @override
   _WatchlistMoviesPageState createState() => _WatchlistMoviesPageState();
@@ -20,17 +18,8 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
   @override
   void initState() {
     super.initState();
-    context.read<WatchlistMovieBloc>().add(FetchWatchlistMovieEvent());
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    routeObserver.subscribe(this, ModalRoute.of(context)!);
-  }
-
-  void didPopNext() {
-    context.read<WatchlistMovieBloc>().add(FetchWatchlistMovieEvent());
+    Future.microtask(
+        () => context.read<WatchlistMoviesBloc>().add(WatchlistMovies()));
   }
 
   @override
@@ -41,13 +30,13 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: BlocBuilder<WatchlistMovieBloc, WatchlistMovieState>(
+        child: BlocBuilder<WatchlistMoviesBloc, StateRequest>(
           builder: (context, state) {
-            if (state is WatchlistMovieLoading) {
+            if (state is Loading) {
               return const Center(
                 child: CircularProgressIndicator(),
               );
-            } else if (state is WatchlistMovieLoaded) {
+            } else if (state is HasData) {
               return ListView.builder(
                 itemBuilder: (context, index) {
                   final movie = state.result[index];

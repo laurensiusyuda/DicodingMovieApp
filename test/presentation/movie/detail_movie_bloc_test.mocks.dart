@@ -6,7 +6,8 @@ import 'dart:async' as _i7;
 
 import 'package:dartz/dartz.dart' as _i5;
 import 'package:core/core.dart' as _i10;
-import 'package:ditonton/domain/entities/movie_detail.dart' as _i11;
+import 'package:ditonton/domain/entities/movie_entities/movie_detail.dart'
+    as _i11;
 import 'package:ditonton/domain/repositories/movie_repository.dart' as _i4;
 import 'package:ditonton/domain/usecases/usecases_movie/get_movie_detail.dart'
     as _i2;

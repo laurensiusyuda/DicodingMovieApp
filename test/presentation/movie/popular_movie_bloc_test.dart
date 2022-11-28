@@ -1,7 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:dartz/dartz.dart';
 import 'package:core/core.dart';
-import 'package:ditonton/domain/entities/movie.dart';
+import 'package:ditonton/domain/entities/movie_entities/movie.dart';
 import 'package:ditonton/domain/usecases/usecases_movie/get_popular_movies.dart';
 import 'package:ditonton/presentation/bloc/movie/popular_movie/popular_movie_bloc.dart';
 import 'package:ditonton/presentation/bloc/movie/popular_movie/popular_movie_event.dart';

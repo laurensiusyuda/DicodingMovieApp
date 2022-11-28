@@ -1,10 +1,13 @@
 import 'package:equatable/equatable.dart';
 
-abstract class NowPlayingMovieEvent extends Equatable {
-  const NowPlayingMovieEvent();
+abstract class NowPlayingEvent extends Equatable {
+  const NowPlayingEvent();
 
   @override
   List<Object> get props => [];
 }
 
-class FetchNowPlayingMovieEvent extends NowPlayingMovieEvent {}
+class NowPlayingMovies extends NowPlayingEvent {
+  @override
+  List<Object> get props => [];
+}

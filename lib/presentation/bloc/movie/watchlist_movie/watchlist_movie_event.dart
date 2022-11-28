@@ -1,31 +1,41 @@
+import 'package:ditonton/domain/entities/movie_entities/movie_detail.dart';
 import 'package:equatable/equatable.dart';
-import 'package:ditonton/domain/entities/movie_detail.dart';
 
-abstract class WatchlistMovieEvent extends Equatable {
-  const WatchlistMovieEvent();
+abstract class WatchlistEvent extends Equatable {
+  const WatchlistEvent();
+
   @override
   List<Object> get props => [];
 }
 
-class FetchWatchlistMovieEvent extends WatchlistMovieEvent {}
-
-class FetchStatusMovieEvent extends WatchlistMovieEvent {
+class LoadWatchlistStatus extends WatchlistEvent {
   final int id;
-  const FetchStatusMovieEvent(this.id);
+
+  const LoadWatchlistStatus(this.id);
+
   @override
   List<Object> get props => [id];
 }
 
-class AddItemMovieEvent extends WatchlistMovieEvent {
-  final MovieDetail result;
-  const AddItemMovieEvent(this.result);
+class AddWatchlist extends WatchlistEvent {
+  final MovieDetailEntity movieDetailEntity;
+
+  const AddWatchlist(this.movieDetailEntity);
+
   @override
-  List<Object> get props => [result];
+  List<Object> get props => [MovieDetailEntity];
 }
 
-class RemoveItemMovieEvent extends WatchlistMovieEvent {
-  final MovieDetail result;
-  const RemoveItemMovieEvent(this.result);
+class RemoveFromWatchlist extends WatchlistEvent {
+  final MovieDetailEntity movieDetailEntity;
+
+  const RemoveFromWatchlist(this.movieDetailEntity);
+
   @override
-  List<Object> get props => [result];
+  List<Object> get props => [MovieDetailEntity];
+}
+
+class WatchlistMovies extends WatchlistEvent {
+  @override
+  List<Object> get props => [];
 }

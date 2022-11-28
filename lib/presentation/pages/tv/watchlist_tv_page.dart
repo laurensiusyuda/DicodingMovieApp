@@ -1,50 +1,38 @@
 import 'package:core/core.dart';
+import 'package:ditonton/presentation/bloc/tv/watchlist_tv/watchlist_event.dart';
+import 'package:ditonton/presentation/bloc/tv/watchlist_tv/watchlist_tv_bloc.dart';
+import 'package:ditonton/presentation/widgets/Tv_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:ditonton/presentation/widgets/tv_card_list.dart';
-import 'package:ditonton/presentation/bloc/tv/tv_watchlist/tv_watchlist_bloc.dart';
-import 'package:ditonton/presentation/bloc/tv/tv_watchlist/tv_watchlist_event.dart';
-import 'package:ditonton/presentation/bloc/tv/tv_watchlist/tv_watchlist_state.dart';
-
 class WatchlistTvPage extends StatefulWidget {
-  static const ROUTE_NAME = '/watchlist-tv';
+  static const routeName = '/watchlist-tv';
+
+  const WatchlistTvPage({Key? key}) : super(key: key);
+
   @override
   _WatchlistTvPageState createState() => _WatchlistTvPageState();
 }
 
-class _WatchlistTvPageState extends State<WatchlistTvPage> with RouteAware {
+class _WatchlistTvPageState extends State<WatchlistTvPage> {
   @override
   void initState() {
     super.initState();
-    context.read<WatchlistTvBloc>().add(FetchWatchlistTvEvent());
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    routeObserver.subscribe(this, ModalRoute.of(context)!);
-  }
-
-  void didPopNext() {
-    context.read<WatchlistTvBloc>().add(FetchWatchlistTvEvent());
+    Future.microtask(() => context.read<WatchlistTvBloc>().add(WatchlistTv()));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Watchlist'),
-      ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: BlocBuilder<WatchlistTvBloc, WatchlistTvState>(
+        child: BlocBuilder<WatchlistTvBloc, StateRequest>(
           builder: (context, state) {
-            if (state is WatchlistTvLoading) {
+            if (state is Loading) {
               return const Center(
                 child: CircularProgressIndicator(),
               );
-            } else if (state is WatchlistTvLoaded) {
+            } else if (state is HasData) {
               return ListView.builder(
                 itemBuilder: (context, index) {
                   final tv = state.result[index];
@@ -52,21 +40,16 @@ class _WatchlistTvPageState extends State<WatchlistTvPage> with RouteAware {
                 },
                 itemCount: state.result.length,
               );
-            } else {
-              return Center(
-                key: Key('error_message'),
-                child: Text("Errorrrr"),
+            } else if (state is Empty) {
+              return const Center(
+                child: Text('Empty favorite'),
               );
+            } else {
+              return Container();
             }
           },
         ),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    routeObserver.unsubscribe(this);
-    super.dispose();
   }
 }

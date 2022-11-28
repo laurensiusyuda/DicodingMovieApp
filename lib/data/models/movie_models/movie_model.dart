@@ -1,8 +1,8 @@
-import 'package:ditonton/domain/entities/movie.dart';
+import 'package:ditonton/domain/entities/movie_entities/movie.dart';
 import 'package:equatable/equatable.dart';
 
 class MovieModel extends Equatable {
-  MovieModel({
+  const MovieModel({
     required this.adult,
     required this.backdropPath,
     required this.genreIds,
@@ -64,21 +64,21 @@ class MovieModel extends Equatable {
         "vote_count": voteCount,
       };
 
-  Movie toEntity() {
-    return Movie(
-      adult: this.adult,
-      backdropPath: this.backdropPath,
-      genreIds: this.genreIds,
-      id: this.id,
-      originalTitle: this.originalTitle,
-      overview: this.overview,
-      popularity: this.popularity,
-      posterPath: this.posterPath,
-      releaseDate: this.releaseDate,
-      title: this.title,
-      video: this.video,
-      voteAverage: this.voteAverage,
-      voteCount: this.voteCount,
+  MovieEntity toEntity() {
+    return MovieEntity(
+      adult: adult,
+      backdropPath: backdropPath,
+      genreIds: genreIds,
+      id: id,
+      originalTitle: originalTitle,
+      overview: overview,
+      popularity: popularity,
+      posterPath: posterPath,
+      releaseDate: releaseDate,
+      title: title,
+      video: video,
+      voteAverage: voteAverage,
+      voteCount: voteCount,
     );
   }
 

@@ -1,11 +1,9 @@
+import 'package:core/core.dart';
+import 'package:ditonton/presentation/widgets/Tv_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'package:ditonton/presentation/widgets/tv_card_list.dart';
-
 import 'package:ditonton/presentation/bloc/tv/tv_now_playing/tv_now_playing_bloc.dart';
 import 'package:ditonton/presentation/bloc/tv/tv_now_playing/tv_now_playing_event.dart';
-import 'package:ditonton/presentation/bloc/tv/tv_now_playing/tv_now_playing_state.dart';
 
 class NowPlayingTvPage extends StatefulWidget {
   static const ROUTE_NAME = '/nowplaying-tv';
@@ -18,7 +16,8 @@ class _NowPlayingTvPageState extends State<NowPlayingTvPage> {
   @override
   void initState() {
     super.initState();
-    context.read<OnTheAirTvBloc>().add(FetchOnTheAirTvEvent());
+    Future.microtask(
+        () => context.read<NowPlayingTvBloc>().add(NowPlayingTv()));
   }
 
   @override
@@ -29,13 +28,13 @@ class _NowPlayingTvPageState extends State<NowPlayingTvPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: BlocBuilder<OnTheAirTvBloc, OnTheAirTvState>(
+        child: BlocBuilder<NowPlayingTvBloc, StateRequest>(
           builder: (context, state) {
-            if (state is OnTheAirTvLoading) {
+            if (state is Loading) {
               return const Center(
                 child: CircularProgressIndicator(),
               );
-            } else if (state is OnTheAirTvLoaded) {
+            } else if (state is HasData) {
               return ListView.builder(
                 itemBuilder: (context, index) {
                   final tv = state.result[index];

@@ -17,7 +17,7 @@ import 'package:ditonton/data/models/tv_series/tv_model.dart' as _i11;
 import 'package:ditonton/data/models/tv_series/tv_table.dart' as _i13;
 import 'package:ditonton/domain/entities/tv_entities/tv.dart' as _i8;
 import 'package:ditonton/domain/entities/tv_entities/tv_detail.dart' as _i9;
-import 'package:ditonton/domain/repositories/tv_repository.dart' as _i5;
+import 'package:ditonton/domain/repositories/repository.dart' as _i5;
 import 'package:http/http.dart' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:sqflite/sqflite.dart' as _i15;

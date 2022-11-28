@@ -4,10 +4,10 @@ import 'package:dartz/dartz.dart';
 import 'package:ditonton/data/models/movie_models/genre_model.dart';
 import 'package:ditonton/data/models/movie_models/movie_detail_model.dart';
 import 'package:ditonton/data/models/movie_models/movie_model.dart';
-import 'package:ditonton/data/repositories/movie_repository_impl.dart';
+import 'package:ditonton/data/repositories/repository_impl.dart';
 import 'package:core/core.dart';
 
-import 'package:ditonton/domain/entities/movie.dart';
+import 'package:ditonton/domain/entities/movie_entities/movie.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 

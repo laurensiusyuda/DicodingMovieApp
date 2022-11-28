@@ -1,8 +1,8 @@
-import 'package:ditonton/domain/entities/genre.dart';
+import 'package:ditonton/domain/entities/movie_entities/genre.dart';
 import 'package:equatable/equatable.dart';
 
-class GenreModel extends Equatable {
-  GenreModel({
+class MovieGenreModel extends Equatable {
+  const MovieGenreModel({
     required this.id,
     required this.name,
   });
@@ -10,7 +10,8 @@ class GenreModel extends Equatable {
   final int id;
   final String name;
 
-  factory GenreModel.fromJson(Map<String, dynamic> json) => GenreModel(
+  factory MovieGenreModel.fromJson(Map<String, dynamic> json) =>
+      MovieGenreModel(
         id: json["id"],
         name: json["name"],
       );
@@ -20,8 +21,8 @@ class GenreModel extends Equatable {
         "name": name,
       };
 
-  Genre toEntity() {
-    return Genre(id: this.id, name: this.name);
+  MovieGenreEntity toEntity() {
+    return MovieGenreEntity(id: id, name: name);
   }
 
   @override

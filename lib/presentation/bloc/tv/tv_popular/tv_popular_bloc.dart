@@ -1,22 +1,22 @@
 import 'package:bloc/bloc.dart';
+import 'package:core/core.dart';
 
 import 'package:ditonton/domain/usecases/usecases_tv/get_popular_tv.dart';
 import 'package:ditonton/presentation/bloc/tv/tv_popular/tv_popular_event.dart';
-import 'package:ditonton/presentation/bloc/tv/tv_popular/tv_popular_state.dart';
 
-class PopularTvBloc extends Bloc<PopularTvEvent, PopularTvState> {
-  final GetPopularTv getPopularTv;
+class PopularTvBloc extends Bloc<PopularEvent, StateRequest> {
+  final GetPopularTv _getPopularTv;
 
-  PopularTvBloc(this.getPopularTv) : super(PopularTvEmpty()) {
-    on<FetchPopularTvEvent>((event, emit) async {
-      emit(PopularTvLoading());
-      final result = await getPopularTv.execute();
+  PopularTvBloc(this._getPopularTv) : super(Empty()) {
+    on<PopularTv>((event, emit) async {
+      emit(Loading());
+      final result = await _getPopularTv.execute();
       result.fold(
         (failure) {
-          emit(PopularTvError(failure.message));
+          emit(Error(failure.message));
         },
         (data) {
-          emit(PopularTvLoaded(data));
+          emit(HasData(data));
         },
       );
     });

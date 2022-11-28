@@ -7,11 +7,11 @@ import 'package:mockito/mockito.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:ditonton/domain/entities/movie.dart';
+import 'package:ditonton/domain/entities/movie_entities/movie.dart';
 import 'package:ditonton/domain/usecases/usecases_movie/search_movies.dart';
-import 'package:ditonton/presentation/bloc/movie/search/search_bloc.dart';
-import 'package:ditonton/presentation/bloc/movie/search/search_event.dart';
-import 'package:ditonton/presentation/bloc/movie/search/search_state.dart';
+import 'package:ditonton/presentation/bloc/search/search_bloc.dart';
+import 'package:ditonton/presentation/bloc/search/search_event.dart';
+import 'package:ditonton/presentation/bloc/search/search_state.dart';
 
 import 'search_bloc_test.mocks.dart';
 

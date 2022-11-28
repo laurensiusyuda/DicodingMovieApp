@@ -1,110 +1,108 @@
-import 'package:ditonton/data/models/movie_models/genre_model.dart';
+import 'package:ditonton/data/models/tv_series/tv_genre_model.dart';
 import 'package:ditonton/domain/entities/tv_entities/tv_detail.dart';
 import 'package:equatable/equatable.dart';
 
 class TvDetailResponse extends Equatable {
   TvDetailResponse({
+    required this.adult,
     required this.backdropPath,
-    required this.firstAirDate,
     required this.genres,
     required this.id,
-    required this.lastAirDate,
     required this.name,
-    required this.originalName,
+    required this.numberOfEpisodes,
     required this.overview,
     required this.popularity,
     required this.posterPath,
     required this.status,
     required this.tagline,
+    required this.type,
     required this.voteAverage,
-    required this.voteCount,
   });
 
-  final String? backdropPath;
-  final String firstAirDate;
-  final List<GenreModel> genres;
-  final int id;
-  final String lastAirDate;
-  final String name;
-  final String originalName;
-  final String overview;
-  final String posterPath;
-  final double popularity;
-  final String status;
-  final String tagline;
-  final double voteAverage;
-  final int voteCount;
+  bool adult;
+  String backdropPath;
+  List<TvGenreModel> genres;
+  int id;
+  String name;
+  int numberOfEpisodes;
+  String overview;
+  double popularity;
+  String posterPath;
+  String status;
+  String tagline;
+  String type;
+  double voteAverage;
 
   factory TvDetailResponse.fromJson(Map<String, dynamic> json) =>
       TvDetailResponse(
+        adult: json["adult"],
         backdropPath: json["backdrop_path"],
-        genres: List<GenreModel>.from(
-            json["genres"].map((x) => GenreModel.fromJson(x))),
+        genres: List<TvGenreModel>.from(
+            json["genres"].map((x) => TvGenreModel.fromJson(x))),
         id: json["id"],
-        overview: json["overview"],
         name: json["name"],
-        originalName: json["original_name"],
-        popularity: json['popularity'],
+        numberOfEpisodes: json["number_of_episodes"],
+        overview: json["overview"],
+        popularity: json["popularity"].toDouble(),
         posterPath: json["poster_path"],
-        firstAirDate: json["first_air_date"],
-        lastAirDate: json["last_air_date"],
         status: json["status"],
         tagline: json["tagline"],
+        type: json["type"],
         voteAverage: json["vote_average"].toDouble(),
-        voteCount: json["vote_count"],
       );
 
-  Map<String, dynamic> toJson() => {
-        "backdrop_path": backdropPath,
-        "first_air_date": firstAirDate,
-        "genres": List<dynamic>.from(genres.map((x) => x.toJson())),
-        "id": id,
-        "last_air_date": lastAirDate,
-        "name": name,
-        "original_name": originalName,
-        "overview": overview,
-        "popularity": popularity,
-        "poster_path": posterPath,
-        "status": status,
-        "tagline": tagline,
-        "vote_average": voteAverage,
-        "vote_count": voteCount,
-      };
-
-  TvDetail toEntity() {
-    return TvDetail(
-      backdropPath: this.backdropPath,
-      firstAirDate: this.firstAirDate,
-      genres: this.genres.map((genre) => genre.toEntity()).toList(),
-      id: this.id,
-      lastAirDate: this.lastAirDate,
-      name: this.name,
-      originalName: this.originalName,
-      overview: this.overview,
-      posterPath: this.posterPath,
-      status: this.status,
-      tagline: this.tagline,
-      voteCount: this.voteCount,
-      voteAverage: this.voteAverage,
+  TvDetailEntity toEntity() {
+    return TvDetailEntity(
+      adult: adult,
+      backdropPath: backdropPath,
+      id: id,
+      name: name,
+      numberOfEpisodes: numberOfEpisodes,
+      overview: overview,
+      popularity: popularity,
+      posterPath: posterPath,
+      status: status,
+      tagline: tagline,
+      type: type,
+      voteAverage: voteAverage,
+      genres: genres.map((genre) => genre.toEntity()).toList(),
     );
   }
 
   @override
-  // TODO: implement props
-  List<Object?> get props => [
+  List<Object> get props => [
+        adult,
         backdropPath,
-        firstAirDate,
         genres,
         id,
-        lastAirDate,
         name,
-        originalName,
+        numberOfEpisodes,
         overview,
         popularity,
         posterPath,
         status,
         tagline,
+        type,
         voteAverage,
-        voteCount,
       ];
+}
+
+class Genre {
+  Genre({
+    required this.id,
+    required this.name,
+  });
+
+  int id;
+  String name;
+
+  factory Genre.fromJson(Map<String, dynamic> json) => Genre(
+        id: json["id"],
+        name: json["name"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name,
+      };
 }

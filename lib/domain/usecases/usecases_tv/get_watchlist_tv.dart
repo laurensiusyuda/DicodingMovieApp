@@ -1,14 +1,14 @@
 import 'package:dartz/dartz.dart';
+import 'package:core/utils/failure.dart';
 import 'package:ditonton/domain/entities/tv_entities/tv.dart';
-import 'package:ditonton/domain/repositories/tv_repository.dart';
-import 'package:core/core.dart';
+import 'package:ditonton/domain/repositories/repository.dart';
 
 class GetWatchlistTv {
-  final TvRepository _tvRepository;
+  final MovieRepository _repository;
 
-  GetWatchlistTv(this._tvRepository);
+  GetWatchlistTv(this._repository);
 
-  Future<Either<Failure, List<Tv>>> execute() {
-    return _tvRepository.getWatchlistTv();
+  Future<Either<Failure, List<TvEntity>>> execute() {
+    return _repository.getWatchlistTv();
   }
 }

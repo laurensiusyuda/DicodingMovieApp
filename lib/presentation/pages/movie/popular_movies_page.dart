@@ -1,12 +1,13 @@
+import 'package:core/utils/state_enum.dart';
+import 'package:ditonton/presentation/widgets/Movie_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ditonton/presentation/widgets/movie_card_list.dart';
 import 'package:ditonton/presentation/bloc/movie/popular_movie/popular_movie_bloc.dart';
 import 'package:ditonton/presentation/bloc/movie/popular_movie/popular_movie_event.dart';
-import 'package:ditonton/presentation/bloc/movie/popular_movie/popular_movie_state.dart';
 
 class PopularMoviesPage extends StatefulWidget {
   static const ROUTE_NAME = '/popular-movie';
+  const PopularMoviesPage({Key? key}) : super(key: key);
 
   @override
   _PopularMoviesPageState createState() => _PopularMoviesPageState();
@@ -16,7 +17,8 @@ class _PopularMoviesPageState extends State<PopularMoviesPage> {
   @override
   void initState() {
     super.initState();
-    context.read<PopularMovieBloc>().add(FetchPopularMovieEvent());
+    Future.microtask(
+        () => context.read<PopularMoviesBloc>().add(PopularMovies()));
   }
 
   @override
@@ -27,13 +29,13 @@ class _PopularMoviesPageState extends State<PopularMoviesPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: BlocBuilder<PopularMovieBloc, PopularMovieState>(
+        child: BlocBuilder<PopularMoviesBloc, StateRequest>(
           builder: (context, state) {
-            if (state is PopularMovieLoading) {
+            if (state is Loading) {
               return const Center(
                 child: CircularProgressIndicator(),
               );
-            } else if (state is PopularMovieLoaded) {
+            } else if (state is HasData) {
               return ListView.builder(
                 itemBuilder: (context, index) {
                   final movie = state.result[index];

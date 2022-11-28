@@ -1,72 +1,60 @@
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
-
+import 'package:core/utils/state_enum.dart';
+import 'package:ditonton/domain/usecases/usecases_movie/save_watchlist.dart';
+import 'package:ditonton/domain/usecases/usecases_movie/remove_watchlist.dart';
 import 'package:ditonton/domain/usecases/usecases_movie/get_watchlist_movies.dart';
 import 'package:ditonton/domain/usecases/usecases_movie/get_watchlist_status.dart';
-import 'package:ditonton/domain/usecases/usecases_movie/remove_watchlist.dart';
-import 'package:ditonton/domain/usecases/usecases_movie/save_watchlist.dart';
-import 'package:ditonton/presentation/bloc/movie/watchlist_movie/watchlist_movie_state.dart';
 import 'package:ditonton/presentation/bloc/movie/watchlist_movie/watchlist_movie_event.dart';
 
-class WatchlistMovieBloc
-    extends Bloc<WatchlistMovieEvent, WatchlistMovieState> {
-  static const watchlistAddSuccessMessage = 'Added to Watchlist';
-  static const watchlistRemoveSuccessMessage = 'Removed from Watchlist';
+class WatchlistMoviesBloc extends Bloc<WatchlistEvent, StateRequest> {
+  final GetWatchListStatusMovie _getWatchListStatusMovie;
+  final SaveWatchlistMovie _saveWatchlistMovie;
+  final RemoveWatchlistMovie _removeWatchlistMovie;
+  final GetWatchlistMovies _getWatchlistMovies;
 
-  final GetWatchlistMovies getWatchlistMovies;
-  final GetWatchListStatus getWatchListStatus;
-  final SaveWatchlist saveWatchlist;
-  final RemoveWatchlist removeWatchlist;
+  WatchlistMoviesBloc(this._getWatchlistMovies, this._getWatchListStatusMovie,
+      this._saveWatchlistMovie, this._removeWatchlistMovie)
+      : super(Empty()) {
+    on<LoadWatchlistStatus>((event, emit) async {
+      final id = event.id;
+      emit(Loading());
+      final result = await _getWatchListStatusMovie.execute(id);
+      emit(HasStatus(result));
+    });
 
-  WatchlistMovieBloc({
-    required this.getWatchlistMovies,
-    required this.getWatchListStatus,
-    required this.saveWatchlist,
-    required this.removeWatchlist,
-  }) : super(WatchlistMovieEmpty()) {
-    on<FetchWatchlistMovieEvent>((event, emit) async {
-      emit(WatchlistMovieLoading());
-      final result = await getWatchlistMovies.execute();
+    on<AddWatchlist>((event, emit) async {
+      final movie = event.movieDetailEntity;
 
+      final result = await _saveWatchlistMovie.execute(movie);
+
+      result.fold((failure) {
+        emit(Error(failure.message));
+      }, (message) {
+        emit(HasMessage(message));
+      });
+    });
+
+    on<RemoveFromWatchlist>((event, emit) async {
+      final movie = event.movieDetailEntity;
+
+      final result = await _removeWatchlistMovie.execute(movie);
+
+      result.fold((failure) {
+        emit(Error(failure.message));
+      }, (message) {
+        emit(HasMessage(message));
+      });
+    });
+
+    on<WatchlistMovies>((event, emit) async {
+      emit(Loading());
+      final result = await _getWatchlistMovies.execute();
       result.fold(
         (failure) {
-          emit(WatchlistMovieError(failure.message));
+          emit(Error(failure.message));
         },
         (data) {
-          emit(WatchlistMovieLoaded(data));
-        },
-      );
-    });
-
-    on<FetchStatusMovieEvent>((event, emit) async {
-      final result = await getWatchListStatus.execute(event.id);
-
-      emit(WatchlistStatusMovieLoaded(result));
-    });
-
-    on<AddItemMovieEvent>((event, emit) async {
-      final movieDetail = event.result;
-      final result = await saveWatchlist.execute(movieDetail);
-      result.fold(
-        (failure) {
-          emit(WatchlistMovieError(failure.message));
-        },
-        (successMessage) {
-          emit(WatchlistMovieSuccess(successMessage));
-        },
-      );
-    });
-
-    on<RemoveItemMovieEvent>((event, emit) async {
-      final movieDetail = event.result;
-      final result = await removeWatchlist.execute(movieDetail);
-
-      result.fold(
-        (failure) {
-          emit(WatchlistMovieError(failure.message));
-        },
-        (successMessage) {
-          emit(WatchlistMovieSuccess(successMessage));
+          emit(HasData(data));
         },
       );
     });

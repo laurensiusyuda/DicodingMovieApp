@@ -1,21 +1,30 @@
 import 'package:ditonton/data/models/tv_series/tv_model.dart';
-import 'package:equatable/equatable.dart';
 
-class TvResponse extends Equatable {
-  final List<TvModel> tvList;
+class TvResponse {
+  TvResponse({
+    required this.page,
+    required this.results,
+    required this.totalPages,
+    required this.totalResults,
+  });
 
-  TvResponse({required this.tvList});
+  int page;
+  List<TvModel> results;
+  int totalPages;
+  int totalResults;
 
   factory TvResponse.fromJson(Map<String, dynamic> json) => TvResponse(
-        tvList: List<TvModel>.from((json["results"] as List)
-            .map((x) => TvModel.fromJson(x))
-            .where((element) => element.posterPath != null)),
+        page: json["page"],
+        results:
+            List<TvModel>.from(json["results"].map((x) => TvModel.fromJson(x))),
+        totalPages: json["total_pages"],
+        totalResults: json["total_results"],
       );
 
   Map<String, dynamic> toJson() => {
-        "results": List<dynamic>.from(tvList.map((x) => x.toJson())),
+        "page": page,
+        "results": List<dynamic>.from(results.map((x) => x.toJson())),
+        "total_pages": totalPages,
+        "total_results": totalResults,
       };
-
-  @override
-  List<Object> get props => [tvList];
 }

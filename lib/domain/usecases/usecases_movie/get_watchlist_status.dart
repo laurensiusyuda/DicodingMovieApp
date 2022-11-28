@@ -1,11 +1,11 @@
-import 'package:ditonton/domain/repositories/movie_repository.dart';
+import 'package:ditonton/domain/repositories/repository.dart';
 
-class GetWatchListStatus {
+class GetWatchListStatusMovie {
   final MovieRepository repository;
 
-  GetWatchListStatus(this.repository);
+  GetWatchListStatusMovie(this.repository);
 
   Future<bool> execute(int id) async {
-    return repository.isAddedToWatchlist(id);
+    return repository.isAddedToWatchlistMovies(id);
   }
 }

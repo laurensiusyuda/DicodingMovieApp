@@ -1,22 +1,22 @@
 import 'package:bloc/bloc.dart';
+import 'package:core/core.dart';
 import 'package:ditonton/domain/usecases/usecases_tv/get_now_playing_tv.dart';
 
 import 'package:ditonton/presentation/bloc/tv/tv_now_playing/tv_now_playing_event.dart';
-import 'package:ditonton/presentation/bloc/tv/tv_now_playing/tv_now_playing_state.dart';
 
-class OnTheAirTvBloc extends Bloc<OnTheAirTvEvent, OnTheAirTvState> {
-  final GetOnTheAirTv getOnTheAirTv;
+class NowPlayingTvBloc extends Bloc<NowPlayingEvent, StateRequest> {
+  final GetNowPlayingTv _getNowPlayingTv;
 
-  OnTheAirTvBloc(this.getOnTheAirTv) : super(OnTheAirTvEmpty()) {
-    on<FetchOnTheAirTvEvent>((event, emit) async {
-      emit(OnTheAirTvLoading());
-      final result = await getOnTheAirTv.execute();
+  NowPlayingTvBloc(this._getNowPlayingTv) : super(Empty()) {
+    on<NowPlayingTv>((event, emit) async {
+      emit(Loading());
+      final result = await _getNowPlayingTv.execute();
       result.fold(
         (failure) {
-          emit(OnTheAirTvError(failure.message));
+          emit(Error(failure.message));
         },
         (data) {
-          emit(OnTheAirTvLoaded(data));
+          emit(HasData(data));
         },
       );
     });

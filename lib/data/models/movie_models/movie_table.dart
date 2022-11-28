@@ -1,6 +1,7 @@
-import 'package:ditonton/domain/entities/movie.dart';
-import 'package:ditonton/domain/entities/movie_detail.dart';
 import 'package:equatable/equatable.dart';
+import 'package:ditonton/data/models/movie_models/movie_model.dart';
+import 'package:ditonton/domain/entities/movie_entities/movie.dart';
+import 'package:ditonton/domain/entities/movie_entities/movie_detail.dart';
 
 class MovieTable extends Equatable {
   final int id;
@@ -8,14 +9,14 @@ class MovieTable extends Equatable {
   final String? posterPath;
   final String? overview;
 
-  MovieTable({
+  const MovieTable({
     required this.id,
     required this.title,
     required this.posterPath,
     required this.overview,
   });
 
-  factory MovieTable.fromEntity(MovieDetail movie) => MovieTable(
+  factory MovieTable.fromEntity(MovieDetailEntity movie) => MovieTable(
         id: movie.id,
         title: movie.title,
         posterPath: movie.posterPath,
@@ -29,6 +30,13 @@ class MovieTable extends Equatable {
         overview: map['overview'],
       );
 
+  factory MovieTable.fromDTO(MovieModel movie) => MovieTable(
+        id: movie.id,
+        title: movie.title,
+        posterPath: movie.posterPath,
+        overview: movie.overview,
+      );
+
   Map<String, dynamic> toJson() => {
         'id': id,
         'title': title,
@@ -36,7 +44,7 @@ class MovieTable extends Equatable {
         'overview': overview,
       };
 
-  Movie toEntity() => Movie.watchlist(
+  MovieEntity toEntity() => MovieEntity.watchlist(
         id: id,
         overview: overview,
         posterPath: posterPath,

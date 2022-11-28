@@ -1,16 +1,16 @@
 import 'package:equatable/equatable.dart';
 
-abstract class RecommendationTvEvent extends Equatable {
-  const RecommendationTvEvent();
+abstract class TvRecommendationEvent extends Equatable {
+  const TvRecommendationEvent();
 
   @override
   List<Object> get props => [];
 }
 
-class FetchRecommendationTvEvent extends RecommendationTvEvent {
+class GetTvRecommendationId extends TvRecommendationEvent {
   final int id;
 
-  const FetchRecommendationTvEvent(this.id);
+  const GetTvRecommendationId(this.id);
 
   @override
   List<Object> get props => [id];

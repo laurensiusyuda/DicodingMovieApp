@@ -1,14 +1,14 @@
 import 'package:dartz/dartz.dart';
 import 'package:ditonton/domain/entities/tv_entities/tv_detail.dart';
-import 'package:ditonton/domain/repositories/tv_repository.dart';
+import 'package:ditonton/domain/repositories/repository.dart';
 import 'package:core/core.dart';
 
 class GetTvDetail {
-  final TvRepository tvRepository;
+  final MovieRepository repository;
 
-  GetTvDetail(this.tvRepository);
+  GetTvDetail(this.repository);
 
-  Future<Either<Failure, TvDetail>> execute(int id) {
-    return tvRepository.getTvDetail(id);
+  Future<Either<Failure, TvDetailEntity>> execute(int id) {
+    return repository.getTvDetail(id);
   }
 }

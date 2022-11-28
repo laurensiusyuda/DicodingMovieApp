@@ -1,12 +1,12 @@
 import 'package:dartz/dartz.dart';
 import 'package:core/core.dart';
 import 'package:ditonton/domain/entities/tv_entities/tv.dart';
-import 'package:ditonton/domain/repositories/tv_repository.dart';
+import 'package:ditonton/domain/repositories/repository.dart';
 
 class GetTopRatedTv {
-  final TvRepository tvRepository;
-  GetTopRatedTv(this.tvRepository);
-  Future<Either<Failure, List<Tv>>> execute() {
-    return tvRepository.getTopRatedTv();
+  final MovieRepository repository;
+  GetTopRatedTv(this.repository);
+  Future<Either<Failure, List<TvEntity>>> execute() {
+    return repository.getTopRatedTv();
   }
 }

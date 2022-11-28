@@ -1,22 +1,15 @@
 import 'package:ditonton/domain/entities/tv_entities/tv.dart';
-
+import 'package:ditonton/presentation/bloc/tv/tv_now_playing/tv_now_playing_event.dart';
 import 'package:ditonton/presentation/pages/tv/now_playing_tv_page.dart';
+import 'package:ditonton/presentation/pages/search_page.dart';
 import 'package:ditonton/presentation/pages/tv/tv_detail_page.dart';
 import 'package:ditonton/presentation/pages/tv/popular_tv_page.dart';
-import 'package:ditonton/presentation/pages/tv/searchtv_page.dart';
 import 'package:ditonton/presentation/pages/tv/top_rated_tv_page.dart';
-
 import 'package:ditonton/presentation/bloc/tv/tv_now_playing/tv_now_playing_bloc.dart';
-import 'package:ditonton/presentation/bloc/tv/tv_now_playing/tv_now_playing_event.dart';
-import 'package:ditonton/presentation/bloc/tv/tv_now_playing/tv_now_playing_state.dart';
-
 import 'package:ditonton/presentation/bloc/tv/tv_popular/tv_popular_bloc.dart';
 import 'package:ditonton/presentation/bloc/tv/tv_popular/tv_popular_event.dart';
-import 'package:ditonton/presentation/bloc/tv/tv_popular/tv_popular_state.dart';
-
 import 'package:ditonton/presentation/bloc/tv/tv_top_rated/tv_top_rated_bloc.dart';
 import 'package:ditonton/presentation/bloc/tv/tv_top_rated/tv_top_rated_event.dart';
-import 'package:ditonton/presentation/bloc/tv/tv_top_rated/tv_top_rated_state.dart';
 
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +17,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
 class HomeTvPage extends StatefulWidget {
-  static const ROUTE_NAME = '/tv_series';
+  static const routeName = '/home-tv';
+
+  const HomeTvPage({Key? key}) : super(key: key);
 
   @override
   _HomeTvPageState createState() => _HomeTvPageState();
@@ -34,23 +29,24 @@ class _HomeTvPageState extends State<HomeTvPage> {
   @override
   void initState() {
     super.initState();
-    super.initState();
-    context.read<OnTheAirTvBloc>().add(FetchOnTheAirTvEvent());
-    context.read<PopularTvBloc>().add(FetchPopularTvEvent());
-    context.read<TopRatedTvBloc>().add(FetchTopRatedTvEvent());
+    Future.microtask(() {
+      context.read<NowPlayingTvBloc>().add(NowPlayingTv());
+      context.read<PopularTvBloc>().add(PopularTv());
+      context.read<TopRatedTvBloc>().add(TopRatedTv());
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Dicoding - TV Series'),
+        title: const Text('Tv'),
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.pushNamed(context, SearchPageTv.ROUTE_NAME);
+              Navigator.pushNamed(context, searchRoute, arguments: false);
             },
-            icon: Icon(Icons.search),
+            icon: const Icon(Icons.search),
           )
         ],
       ),
@@ -58,70 +54,63 @@ class _HomeTvPageState extends State<HomeTvPage> {
         padding: const EdgeInsets.all(8.0),
         child: SingleChildScrollView(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _buildSubHeading(
-                title: 'Now Playing',
-                onTap: () =>
-                    Navigator.pushNamed(context, NowPlayingTvPage.ROUTE_NAME),
-              ),
-              BlocBuilder<OnTheAirTvBloc, OnTheAirTvState>(
-                builder: (context, state) {
-                  if (state is OnTheAirTvLoading) {
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  'Airing today',
+                  style: kHeading6,
+                ),
+                BlocBuilder<NowPlayingTvBloc, StateRequest>(
+                    builder: (context, state) {
+                  if (state is Loading) {
                     return const Center(
                       child: CircularProgressIndicator(),
                     );
-                  } else if (state is OnTheAirTvLoaded) {
+                  } else if (state is HasData) {
                     return TvList(state.result);
-                  } else if (state is OnTheAirTvError) {
-                    return Text(state.message);
                   } else {
-                    return const Text('Failed');
+                    return Container();
                   }
-                },
-              ),
-              _buildSubHeading(
-                title: 'Popular',
-                onTap: () =>
-                    Navigator.pushNamed(context, PopularTvPage.ROUTE_NAME),
-              ),
-              BlocBuilder<PopularTvBloc, PopularTvState>(
-                builder: (context, state) {
-                  if (state is PopularTvLoading) {
+                }),
+                _buildSubHeading(
+                  title: 'Popular',
+                  onTap: () =>
+                      Navigator.pushNamed(context, PopularTvPage.routeName),
+                ),
+                BlocBuilder<PopularTvBloc, StateRequest>(
+                    builder: (context, state) {
+                  if (state is Loading) {
                     return const Center(
                       child: CircularProgressIndicator(),
                     );
-                  } else if (state is PopularTvLoaded) {
+                  } else if (state is HasData) {
                     return TvList(state.result);
-                  } else if (state is PopularTvError) {
-                    return Text(state.message);
+                  } else if (state is Error) {
+                    return Center(
+                      child: Text(state.message, key: const Key('error')),
+                    );
                   } else {
                     return const Text('Failed');
                   }
-                },
-              ),
-              _buildSubHeading(
-                title: 'Top Rated',
-                onTap: () =>
-                    Navigator.pushNamed(context, TopRatedTvPage.ROUTE_NAME),
-              ),
-              BlocBuilder<TopRatedTvBloc, TopRatedTvState>(
-                builder: (context, state) {
-                  if (state is TopRatedTvLoading) {
+                }),
+                _buildSubHeading(
+                  title: 'Top Rated',
+                  onTap: () =>
+                      Navigator.pushNamed(context, TopRatedTvPage.routeName),
+                ),
+                BlocBuilder<TopRatedTvBloc, StateRequest>(
+                    builder: (context, state) {
+                  if (state is Loading) {
                     return const Center(
                       child: CircularProgressIndicator(),
                     );
-                  } else if (state is TopRatedTvLoaded) {
+                  } else if (state is HasData) {
                     return TvList(state.result);
-                  } else if (state is TopRatedTvError) {
-                    return Text(state.message);
                   } else {
-                    return const Text('Failed');
+                    return Container();
                   }
-                },
-              ),
-            ],
-          ),
+                }),
+              ]),
         ),
       ),
     );
@@ -140,7 +129,7 @@ class _HomeTvPageState extends State<HomeTvPage> {
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
-              children: [Text('See More'), Icon(Icons.arrow_forward_ios)],
+              children: const [Text('See More'), Icon(Icons.arrow_forward_ios)],
             ),
           ),
         ),
@@ -150,36 +139,36 @@ class _HomeTvPageState extends State<HomeTvPage> {
 }
 
 class TvList extends StatelessWidget {
-  final List<Tv> tv;
+  final List<TvEntity> tv;
 
-  TvList(this.tv);
+  const TvList(this.tv, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 200,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
-          final tvs = tv[index];
+          final item = tv[index];
           return Container(
             padding: const EdgeInsets.all(8),
             child: InkWell(
               onTap: () {
                 Navigator.pushNamed(
                   context,
-                  TvSeriesDetailPage.ROUTE_NAME,
-                  arguments: tvs.id,
+                  TvDetailPage.routeName,
+                  arguments: item.id,
                 );
               },
               child: ClipRRect(
-                borderRadius: BorderRadius.all(Radius.circular(16)),
+                borderRadius: const BorderRadius.all(Radius.circular(16)),
                 child: CachedNetworkImage(
-                  imageUrl: '$BASE_IMAGE_URL${tvs.posterPath}',
-                  placeholder: (context, url) => Center(
+                  imageUrl: '$baseImageUrl${item.posterPath}',
+                  placeholder: (context, url) => const Center(
                     child: CircularProgressIndicator(),
                   ),
-                  errorWidget: (context, url, error) => Icon(Icons.error),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
                 ),
               ),
             ),

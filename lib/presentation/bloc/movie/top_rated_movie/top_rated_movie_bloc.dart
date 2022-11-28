@@ -1,21 +1,21 @@
 import 'package:bloc/bloc.dart';
+import 'package:core/core.dart';
 import 'package:ditonton/domain/usecases/usecases_movie/get_top_rated_movies.dart';
 import 'package:ditonton/presentation/bloc/movie/top_rated_movie/top_rated_movie_event.dart';
-import 'package:ditonton/presentation/bloc/movie/top_rated_movie/top_rated_movie_state.dart';
 
-class TopRatedMovieBloc extends Bloc<TopRatedMovieEvent, TopRatedMovieState> {
-  final GetTopRatedMovies getTopRatedMovies;
+class TopRatedMoviesBloc extends Bloc<TopRatedEvent, StateRequest> {
+  final GetTopRatedMovies _getTopRatedMovies;
 
-  TopRatedMovieBloc(this.getTopRatedMovies) : super(TopRatedMovieEmpty()) {
-    on<FetchTopRatedMovieEvent>((event, emit) async {
-      emit(TopRatedMovieLoading());
-      final result = await getTopRatedMovies.execute();
+  TopRatedMoviesBloc(this._getTopRatedMovies) : super(Empty()) {
+    on<TopRatedMovies>((event, emit) async {
+      emit(Loading());
+      final result = await _getTopRatedMovies.execute();
       result.fold(
         (failure) {
-          emit(TopRatedMovieError(failure.message));
+          emit(Error(failure.message));
         },
         (data) {
-          emit(TopRatedMovieLoaded(data));
+          emit(HasData(data));
         },
       );
     });
