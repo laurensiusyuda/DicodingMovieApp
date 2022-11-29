@@ -1,8 +1,10 @@
 import 'package:core/core.dart';
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:ditonton/data/datasources/db/database_helper.dart';
+import 'package:ditonton/data/datasources/db/database_tv_helper.dart';
 // datasource
 import 'package:ditonton/data/datasources/local_data_source.dart';
+import 'package:ditonton/data/datasources/local_data_source_tv.dart';
 import 'package:ditonton/data/datasources/remote_data_source.dart';
 // repo
 import 'package:ditonton/data/repositories/repository_impl.dart';
@@ -114,6 +116,7 @@ void init() {
       remoteDataSource: locator(),
       localDataSource: locator(),
       networkInfo: locator(),
+      tvLocalDataSource: locator(),
     ),
   );
 
@@ -128,9 +131,17 @@ void init() {
       databaseHelper: locator(),
     ),
   );
+  locator.registerLazySingleton<TvLocalDataSource>(
+    () => TvLocalDataSourceImpl(
+      databaseHelperTv: locator(),
+    ),
+  );
   // database helper movie dan helper tv
   locator.registerLazySingleton<DatabaseHelper>(
     () => DatabaseHelper(),
+  );
+  locator.registerLazySingleton<DatabaseHelperTv>(
+    () => DatabaseHelperTv(),
   );
   // external
   locator.registerLazySingleton(() => HttpSSLPinning.client);

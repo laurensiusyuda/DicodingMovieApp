@@ -3,6 +3,7 @@ import 'package:core/core.dart';
 import 'package:dartz/dartz.dart';
 
 import 'package:ditonton/data/datasources/local_data_source.dart';
+import 'package:ditonton/data/datasources/local_data_source_tv.dart';
 import 'package:ditonton/data/datasources/remote_data_source.dart';
 
 import 'package:ditonton/data/models/movie_models/movie_table.dart';
@@ -17,32 +18,26 @@ import 'package:ditonton/domain/repositories/repository.dart';
 class MovieRepositoryImpl implements MovieRepository {
   final MovieRemoteDataSource remoteDataSource;
   final MovieLocalDataSource localDataSource;
+  final TvLocalDataSource tvLocalDataSource;
   final NetworkInfo networkInfo;
 
   MovieRepositoryImpl({
     required this.remoteDataSource,
     required this.localDataSource,
     required this.networkInfo,
+    required this.tvLocalDataSource,
   });
 
-  @override
   Future<Either<Failure, List<MovieEntity>>> getNowPlayingMovies() async {
-    if (await networkInfo.isConnected) {
-      try {
-        final result = await remoteDataSource.getNowPlayingMovies();
-        localDataSource.cacheNowPlayingMovies(
-            result.map((movie) => MovieTable.fromDTO(movie)).toList());
-        return Right(result.map((model) => model.toEntity()).toList());
-      } on ServerException {
-        return const Left(ServerFailure(''));
-      }
-    } else {
-      try {
-        final result = await localDataSource.getCachedNowPlayingMovies();
-        return Right(result.map((model) => model.toEntity()).toList());
-      } on CacheException catch (e) {
-        return Left(CacheFailure(e.message));
-      }
+    try {
+      final result = await remoteDataSource.getNowPlayingMovies();
+      return Right(result.map((model) => model.toEntity()).toList());
+    } on ServerException {
+      return Left(ServerFailure(''));
+    } on SocketException {
+      return Left(ConnectionFailure('Failed to connect to the network'));
+    } on TlsException {
+      return Left(SSLFailure('CERTIFICATE_VERIFY_FAILED'));
     }
   }
 
@@ -52,9 +47,11 @@ class MovieRepositoryImpl implements MovieRepository {
       final result = await remoteDataSource.getMovieDetail(id);
       return Right(result.toEntity());
     } on ServerException {
-      return const Left(ServerFailure(''));
+      return Left(ServerFailure(''));
     } on SocketException {
-      return const Left(ConnectionFailure('Failed to connect to the network'));
+      return Left(ConnectionFailure('Failed to connect to the network'));
+    } on TlsException {
+      return Left(SSLFailure('CERTIFICATE_VERIFY_FAILED'));
     }
   }
 
@@ -65,51 +62,39 @@ class MovieRepositoryImpl implements MovieRepository {
       final result = await remoteDataSource.getMovieRecommendations(id);
       return Right(result.map((model) => model.toEntity()).toList());
     } on ServerException {
-      return const Left(ServerFailure(''));
+      return Left(ServerFailure(''));
     } on SocketException {
-      return const Left(ConnectionFailure('Failed to connect to the network'));
+      return Left(ConnectionFailure('Failed to connect to the network'));
+    } on TlsException {
+      return Left(SSLFailure('CERTIFICATE_VERIFY_FAILED'));
     }
   }
 
   @override
   Future<Either<Failure, List<MovieEntity>>> getPopularMovies() async {
-    if (await networkInfo.isConnected) {
-      try {
-        final result = await remoteDataSource.getPopularMovies();
-        localDataSource.cachePopularMovies(
-            result.map((movie) => MovieTable.fromDTO(movie)).toList());
-        return Right(result.map((model) => model.toEntity()).toList());
-      } on ServerException {
-        return const Left(ServerFailure(''));
-      }
-    } else {
-      try {
-        final result = await localDataSource.getCachedPopularMovies();
-        return Right(result.map((model) => model.toEntity()).toList());
-      } on CacheException catch (e) {
-        return Left(CacheFailure(e.message));
-      }
+    try {
+      final result = await remoteDataSource.getPopularMovies();
+      return Right(result.map((model) => model.toEntity()).toList());
+    } on ServerException {
+      return Left(ServerFailure(''));
+    } on SocketException {
+      return Left(ConnectionFailure('Failed to connect to the network'));
+    } on TlsException {
+      return Left(SSLFailure('CERTIFICATE_VERIFY_FAILED'));
     }
   }
 
   @override
   Future<Either<Failure, List<MovieEntity>>> getTopRatedMovies() async {
-    if (await networkInfo.isConnected) {
-      try {
-        final result = await remoteDataSource.getTopRatedMovies();
-        localDataSource.cacheTopRatedMovies(
-            result.map((movie) => MovieTable.fromDTO(movie)).toList());
-        return Right(result.map((model) => model.toEntity()).toList());
-      } on ServerException {
-        return const Left(ServerFailure(''));
-      }
-    } else {
-      try {
-        final result = await localDataSource.getCachedTopRatedMovies();
-        return Right(result.map((model) => model.toEntity()).toList());
-      } on CacheException catch (e) {
-        return Left(CacheFailure(e.message));
-      }
+    try {
+      final result = await remoteDataSource.getTopRatedMovies();
+      return Right(result.map((model) => model.toEntity()).toList());
+    } on ServerException {
+      return Left(ServerFailure(''));
+    } on SocketException {
+      return Left(ConnectionFailure('Failed to connect to the network'));
+    } on TlsException {
+      return Left(SSLFailure('CERTIFICATE_VERIFY_FAILED'));
     }
   }
 
@@ -119,9 +104,11 @@ class MovieRepositoryImpl implements MovieRepository {
       final result = await remoteDataSource.searchMovies(query);
       return Right(result.map((model) => model.toEntity()).toList());
     } on ServerException {
-      return const Left(ServerFailure(''));
+      return Left(ServerFailure(''));
     } on SocketException {
-      return const Left(ConnectionFailure('Failed to connect to the network'));
+      return Left(ConnectionFailure('Failed to connect to the network'));
+    } on TlsException {
+      return Left(SSLFailure('CERTIFICATE_VERIFY_FAILED'));
     }
   }
 
@@ -135,7 +122,7 @@ class MovieRepositoryImpl implements MovieRepository {
     } on DatabaseException catch (e) {
       return Left(DatabaseFailure(e.message));
     } catch (e) {
-      rethrow;
+      throw e;
     }
   }
 
@@ -148,6 +135,8 @@ class MovieRepositoryImpl implements MovieRepository {
       return Right(result);
     } on DatabaseException catch (e) {
       return Left(DatabaseFailure(e.message));
+    } on TlsException {
+      return Left(SSLFailure('CERTIFICATE_VERIFY_FAILED'));
     }
   }
 
@@ -164,77 +153,16 @@ class MovieRepositoryImpl implements MovieRepository {
   }
 
   @override
-  Future<Either<Failure, List<TvEntity>>> getPopularTv() async {
-    if (await networkInfo.isConnected) {
-      try {
-        final result = await remoteDataSource.getPopularTv();
-        localDataSource
-            .cachePopularTv(result.map((tv) => TvTable.fromDTO(tv)).toList());
-        return Right(result.map((model) => model.toEntity()).toList());
-      } on ServerException {
-        return const Left(ServerFailure(''));
-      }
-    } else {
-      try {
-        final result = await localDataSource.getCachedPopularTv();
-        return Right(result.map((model) => model.toEntity()).toList());
-      } on CacheException catch (e) {
-        return Left(CacheFailure(e.message));
-      }
-    }
-  }
-
-  @override
   Future<Either<Failure, List<TvEntity>>> getNowPlayingTv() async {
-    if (await networkInfo.isConnected) {
-      try {
-        final result = await remoteDataSource.getNowPlayingTv();
-        localDataSource.cacheNowPlayingTv(
-            result.map((tv) => TvTable.fromDTO(tv)).toList());
-        return Right(result.map((model) => model.toEntity()).toList());
-      } on ServerException {
-        return const Left(ServerFailure(''));
-      }
-    } else {
-      try {
-        final result = await localDataSource.getCachedNowPlayingTv();
-        return Right(result.map((model) => model.toEntity()).toList());
-      } on CacheException catch (e) {
-        return Left(CacheFailure(e.message));
-      }
-    }
-  }
-
-  @override
-  Future<Either<Failure, List<TvEntity>>> getTopRatedTv() async {
-    if (await networkInfo.isConnected) {
-      try {
-        final result = await remoteDataSource.getTopRatedTv();
-        localDataSource
-            .cacheTopRatedTv(result.map((tv) => TvTable.fromDTO(tv)).toList());
-        return Right(result.map((model) => model.toEntity()).toList());
-      } on ServerException {
-        return const Left(ServerFailure(''));
-      }
-    } else {
-      try {
-        final result = await localDataSource.getCachedTopRatedTv();
-        return Right(result.map((model) => model.toEntity()).toList());
-      } on CacheException catch (e) {
-        return Left(CacheFailure(e.message));
-      }
-    }
-  }
-
-  @override
-  Future<Either<Failure, List<TvEntity>>> searchTv(String query) async {
     try {
-      final result = await remoteDataSource.searchTv(query);
+      final result = await remoteDataSource.getNowPlayingTv();
       return Right(result.map((model) => model.toEntity()).toList());
     } on ServerException {
-      return const Left(ServerFailure(''));
+      return Left(ServerFailure(''));
     } on SocketException {
-      return const Left(ConnectionFailure('Failed to connect to the network'));
+      return Left(ConnectionFailure('Failed to connect to the network'));
+    } on TlsException {
+      return Left(SSLFailure('CERTIFICATE_VERIFY_FAILED'));
     }
   }
 
@@ -244,9 +172,11 @@ class MovieRepositoryImpl implements MovieRepository {
       final result = await remoteDataSource.getTvDetail(id);
       return Right(result.toEntity());
     } on ServerException {
-      return const Left(ServerFailure(''));
+      return Left(ServerFailure(''));
     } on SocketException {
-      return const Left(ConnectionFailure('Failed to connect to the network'));
+      return Left(ConnectionFailure('Failed to connect to the network'));
+    } on TlsException {
+      return Left(SSLFailure('CERTIFICATE_VERIFY_FAILED'));
     }
   }
 
@@ -256,26 +186,53 @@ class MovieRepositoryImpl implements MovieRepository {
       final result = await remoteDataSource.getTvRecommendations(id);
       return Right(result.map((model) => model.toEntity()).toList());
     } on ServerException {
-      return const Left(ServerFailure(''));
+      return Left(ServerFailure(''));
     } on SocketException {
-      return const Left(ConnectionFailure('Failed to connect to the network'));
+      return Left(ConnectionFailure('Failed to connect to the network'));
+    } on TlsException {
+      return Left(SSLFailure('CERTIFICATE_VERIFY_FAILED'));
     }
   }
 
   @override
-  Future<Either<Failure, List<TvEntity>>> getWatchlistTv() async {
-    final result = await localDataSource.getWatchlistTv();
-    return Right(result.map((data) => data.toEntity()).toList());
+  Future<Either<Failure, List<TvEntity>>> getPopularTv() async {
+    try {
+      final result = await remoteDataSource.getPopularTv();
+      return Right(result.map((model) => model.toEntity()).toList());
+    } on ServerException {
+      return Left(ServerFailure(''));
+    } on SocketException {
+      return Left(ConnectionFailure('Failed to connect to the network'));
+    } on TlsException {
+      return Left(SSLFailure('CERTIFICATE_VERIFY_FAILED'));
+    }
   }
 
   @override
-  Future<Either<Failure, String>> removeTvWatchlist(TvDetailEntity tv) async {
+  Future<Either<Failure, List<TvEntity>>> getTopRatedTv() async {
     try {
-      final result =
-          await localDataSource.removeTvWatchlist(TvTable.fromEntity(tv));
-      return Right(result);
-    } on DatabaseException catch (e) {
-      return Left(DatabaseFailure(e.message));
+      final result = await remoteDataSource.getTopRatedTv();
+      return Right(result.map((model) => model.toEntity()).toList());
+    } on ServerException {
+      return Left(ServerFailure(''));
+    } on SocketException {
+      return Left(ConnectionFailure('Failed to connect to the network'));
+    } on TlsException {
+      return Left(SSLFailure('CERTIFICATE_VERIFY_FAILED'));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<TvEntity>>> searchTv(String query) async {
+    try {
+      final result = await remoteDataSource.searchTv(query);
+      return Right(result.map((model) => model.toEntity()).toList());
+    } on ServerException {
+      return Left(ServerFailure(''));
+    } on SocketException {
+      return Left(ConnectionFailure('Failed to connect to the network'));
+    } on TlsException {
+      return Left(SSLFailure('CERTIFICATE_VERIFY_FAILED'));
     }
   }
 
@@ -283,18 +240,37 @@ class MovieRepositoryImpl implements MovieRepository {
   Future<Either<Failure, String>> saveTvWatchlist(TvDetailEntity tv) async {
     try {
       final result =
-          await localDataSource.insertTvWatchlist(TvTable.fromEntity(tv));
+          await tvLocalDataSource.insertTvWatchlist(TvTable.fromEntity(tv));
       return Right(result);
     } on DatabaseException catch (e) {
       return Left(DatabaseFailure(e.message));
     } catch (e) {
-      rethrow;
+      throw e;
+    }
+  }
+
+  @override
+  Future<Either<Failure, String>> removeTvWatchlist(TvDetailEntity tv) async {
+    try {
+      final result =
+          await tvLocalDataSource.removeTvWatchlist(TvTable.fromEntity(tv));
+      return Right(result);
+    } on DatabaseException catch (e) {
+      return Left(DatabaseFailure(e.message));
+    } on TlsException {
+      return Left(SSLFailure('CERTIFICATE_VERIFY_FAILED'));
     }
   }
 
   @override
   Future<bool> isAddedToWatchlistTv(int id) async {
-    final result = await localDataSource.getTvById(id);
+    final result = await tvLocalDataSource.getTvById(id);
     return result != null;
+  }
+
+  @override
+  Future<Either<Failure, List<TvEntity>>> getWatchlistTv() async {
+    final result = await tvLocalDataSource.getWatchlistTv();
+    return Right(result.map((data) => data.toEntity()).toList());
   }
 }
