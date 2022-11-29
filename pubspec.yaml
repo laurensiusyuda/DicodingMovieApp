@@ -57,7 +57,11 @@ dependencies:
     path: about
   core: 
     path: core
-
+  movie:
+    path: movie
+  tv:
+    path: tv
+    
 dev_dependencies:
   bloc_test: ^9.0.0
   mockito: ^5.0.8

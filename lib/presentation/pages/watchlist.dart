@@ -2,15 +2,15 @@ import 'dart:io';
 
 import 'package:core/core.dart';
 import 'package:core/utils/utils.dart';
-import 'package:ditonton/presentation/bloc/movie/watchlist_movie/watchlist_movie_bloc.dart';
-import 'package:ditonton/presentation/bloc/movie/watchlist_movie/watchlist_movie_event.dart';
-import 'package:ditonton/presentation/bloc/tv/watchlist_tv/watchlist_event.dart';
-import 'package:ditonton/presentation/bloc/tv/watchlist_tv/watchlist_tv_bloc.dart';
-import 'package:ditonton/presentation/pages/movie/watchlist_movies_page.dart';
-import 'package:ditonton/presentation/pages/tv/watchlist_tv_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:movie/presentation/bloc/movie/watchlist_movie/watchlist_movie_bloc.dart';
+import 'package:movie/presentation/bloc/movie/watchlist_movie/watchlist_movie_event.dart';
+import 'package:movie/presentation/pages/movie/watchlist_movies_page.dart';
 import 'package:provider/provider.dart';
+import 'package:tv/presentation/bloc/tv/watchlist_tv/watchlist_event.dart';
+import 'package:tv/presentation/bloc/tv/watchlist_tv/watchlist_tv_bloc.dart';
+import 'package:tv/presentation/pages/tv/watchlist_tv_page.dart';
 
 class WatchlistPage extends StatefulWidget {
   static const routeName = '/watchlist';

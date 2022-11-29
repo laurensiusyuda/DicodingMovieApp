@@ -1,4 +1,4 @@
-import 'package:ditonton/domain/entities/movie_entities/movie.dart';
+import 'package:movie/domain/entities/movie_entities/movie.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class SearchState extends Equatable {

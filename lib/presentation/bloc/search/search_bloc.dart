@@ -1,9 +1,9 @@
-import 'package:ditonton/domain/usecases/usecases_tv/search_tv.dart';
 import 'package:ditonton/presentation/bloc/search/search_event.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:core/utils/state_enum.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ditonton/domain/usecases/usecases_movie/search_movies.dart';
+import 'package:movie/domain/usecases/usecases_movie/search_movies.dart';
+import 'package:tv/domain/usecases/usecases_tv/search_tv.dart';
 
 class SearchMoviesBloc extends Bloc<SearchEvent, StateRequest> {
   final SearchMovies _searchMovies;
