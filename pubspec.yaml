@@ -63,10 +63,6 @@ dependencies:
     path: tv
     
 dev_dependencies:
-  bloc_test: ^9.0.0
-  mockito: ^5.0.8
-  build_runner: ^2.0.4
-  flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter
 
