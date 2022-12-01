@@ -1,3 +1,4 @@
+import 'package:tv/presentation/pages/tv/now_playing_tv_page.dart';
 import 'package:tv/presentation/pages/tv/popular_tv_page.dart';
 import 'package:tv/presentation/pages/tv/top_rated_tv_page.dart';
 import 'package:tv/presentation/pages/tv/tv_detail_page.dart';
@@ -55,9 +56,10 @@ class _HomeTvPageState extends State<HomeTvPage> {
           child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text(
-                  'Airing today',
-                  style: kHeading6,
+                _buildSubHeading(
+                  title: 'Now Playing Tv Today',
+                  onTap: () =>
+                      Navigator.pushNamed(context, NowPlayingTvPage.ROUTE_NAME),
                 ),
                 BlocBuilder<NowPlayingTvBloc, StateRequest>(
                     builder: (context, state) {
