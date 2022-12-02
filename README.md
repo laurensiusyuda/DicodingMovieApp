@@ -49,4 +49,4 @@ Jika kamu menerapkan modular pada project, Anda dapat memanfaatkan berkas `test.
     ```
     Proses ini akan men-*generate* berkas `lcov.info` dan folder `coverage` terkait dengan laporan coverage.
 4. Tunggu proses testing selesai hingga muncul web terkait laporan coverage.
-5. [![Codemagic build status](https://api.codemagic.io/apps/<app-id>/<workflow-id>/status_badge.svg)](https://codemagic.io/apps/<app-id>/<workflow-id>/latest_build)
+5. [![Codemagic build status](https://api.codemagic.io/apps/6374631422caaca80a7baebb/6374df171265169b4d9162b8/status_badge.svg)](https://codemagic.io/apps/6374631422caaca80a7baebb/6374df171265169b4d9162b8/latest_build)
