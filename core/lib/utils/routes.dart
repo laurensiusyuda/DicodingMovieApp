@@ -1,5 +1,6 @@
 // movie
 const popularMoviesRoute = '/popular-movie';
+const nowPlayingMovie = '/nowplaying-movie';
 const topRatedRoute = '/top-rated-movie';
 const movieDetailRoute = '/movie-detail';
 //  search and about

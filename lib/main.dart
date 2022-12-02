@@ -20,6 +20,7 @@ import 'package:movie/presentation/pages/movie/movie_detail_page.dart';
 import 'package:movie/presentation/pages/movie/popular_movies_page.dart';
 import 'package:movie/presentation/pages/movie/top_rated_movies_page.dart';
 import 'package:movie/presentation/pages/movie/watchlist_movies_page.dart';
+import 'package:movie/presentation/pages/movie/now_playing_movie.dart';
 import 'package:provider/provider.dart';
 import 'package:tv/presentation/bloc/tv/tv_detail/tv_detail_bloc.dart';
 import 'package:tv/presentation/bloc/tv/tv_now_playing/tv_now_playing_bloc.dart';
@@ -28,6 +29,7 @@ import 'package:tv/presentation/bloc/tv/tv_recomendation/tv_recomendation_bloc.d
 import 'package:tv/presentation/bloc/tv/tv_top_rated/tv_top_rated_bloc.dart';
 import 'package:tv/presentation/bloc/tv/watchlist_tv/watchlist_tv_bloc.dart';
 import 'package:tv/presentation/pages/tv/home_tv_page.dart';
+import 'package:tv/presentation/pages/tv/now_playing_tv_page.dart';
 import 'package:tv/presentation/pages/tv/popular_tv_page.dart';
 import 'package:tv/presentation/pages/tv/top_rated_tv_page.dart';
 import 'package:tv/presentation/pages/tv/tv_detail_page.dart';
@@ -126,6 +128,10 @@ class MyApp extends StatelessWidget {
               return MaterialPageRoute(builder: (_) => AboutPage());
             case HomeTvPage.routeName:
               return MaterialPageRoute(builder: (_) => HomeTvPage());
+            case NowPlayingTvPage.routeName:
+              return CupertinoPageRoute(builder: (_) => NowPlayingTvPage());
+            case NowPlayingMoviePage.routeName:
+              return CupertinoPageRoute(builder: (_) => NowPlayingMoviePage());
             case PopularTvPage.routeName:
               return CupertinoPageRoute(builder: (_) => PopularTvPage());
             case TopRatedTvPage.routeName:

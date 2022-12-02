@@ -59,7 +59,7 @@ class _HomeTvPageState extends State<HomeTvPage> {
                 _buildSubHeading(
                   title: 'Now Playing Tv Today',
                   onTap: () =>
-                      Navigator.pushNamed(context, NowPlayingTvPage.ROUTE_NAME),
+                      Navigator.pushNamed(context, NowPlayingTvPage.routeName),
                 ),
                 BlocBuilder<NowPlayingTvBloc, StateRequest>(
                     builder: (context, state) {

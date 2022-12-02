@@ -1,23 +1,25 @@
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie/presentation/widget/Movie_card_list.dart';
 import 'package:tv/presentation/widget/Tv_card_list.dart';
-import '../../bloc/tv/tv_now_playing/tv_now_playing_bloc.dart';
-import '../../bloc/tv/tv_now_playing/tv_now_playing_event.dart';
 
-class NowPlayingTvPage extends StatefulWidget {
-  static const routeName = '/nowplaying-tv';
+import '../../bloc/movie/now_movie_playing/now_movie_playing_bloc.dart';
+import '../../bloc/movie/now_movie_playing/now_movie_playing_event.dart';
+
+class NowPlayingMoviePage extends StatefulWidget {
+  static const routeName = '/nowplaying-movie';
 
   @override
-  _NowPlayingTvPageState createState() => _NowPlayingTvPageState();
+  _NowPlayingMoviePageState createState() => _NowPlayingMoviePageState();
 }
 
-class _NowPlayingTvPageState extends State<NowPlayingTvPage> {
+class _NowPlayingMoviePageState extends State<NowPlayingMoviePage> {
   @override
   void initState() {
     super.initState();
     Future.microtask(
-        () => context.read<NowPlayingTvBloc>().add(NowPlayingTv()));
+        () => context.read<NowPlayingMoviesBloc>().add(NowPlayingMovies()));
   }
 
   @override
@@ -28,7 +30,7 @@ class _NowPlayingTvPageState extends State<NowPlayingTvPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: BlocBuilder<NowPlayingTvBloc, StateRequest>(
+        child: BlocBuilder<NowPlayingMoviesBloc, StateRequest>(
           builder: (context, state) {
             if (state is Loading) {
               return const Center(
@@ -38,7 +40,7 @@ class _NowPlayingTvPageState extends State<NowPlayingTvPage> {
               return ListView.builder(
                 itemBuilder: (context, index) {
                   final tv = state.result[index];
-                  return TvCard(tv);
+                  return MovieCard(tv);
                 },
                 itemCount: state.result.length,
               );

@@ -13,6 +13,7 @@ import 'package:movie/presentation/bloc/movie/popular_movie/popular_movie_event.
 import 'package:movie/presentation/bloc/movie/top_rated_movie/top_rated_movie_bloc.dart';
 import 'package:movie/presentation/bloc/movie/top_rated_movie/top_rated_movie_event.dart';
 import 'package:movie/presentation/pages/movie/movie_detail_page.dart';
+import 'package:movie/presentation/pages/movie/now_playing_movie.dart';
 import 'package:movie/presentation/pages/movie/popular_movies_page.dart';
 import 'package:movie/presentation/pages/movie/top_rated_movies_page.dart';
 
@@ -95,9 +96,10 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Now Playing',
-                style: kHeading6,
+              _buildSubHeading(
+                title: 'Now Playing Movie',
+                onTap: () =>
+                    Navigator.pushNamed(context, NowPlayingMoviePage.routeName),
               ),
               BlocBuilder<NowPlayingMoviesBloc, StateRequest>(
                   builder: (context, state) {
