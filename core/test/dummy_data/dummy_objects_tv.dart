@@ -81,27 +81,3 @@ final testTvMap = {
   'posterPath': 'posterPath',
   'name': 'name',
 };
-
-const testTvCache = TvTable(
-  id: 52814,
-  name: 'Halo',
-  posterPath: '/nJUHX3XL1jMkk8honUZnUmudFb9.jpg',
-  overview:
-      'Depicting an epic 26th-century conflict between humanity and an alien threat known as the Covenant, the series weaves deeply drawn personal stories with action, adventure and a richly imagined vision of the future.',
-);
-
-final testTvCacheMap = {
-  'id': 52814,
-  'overview':
-      'Depicting an epic 26th-century conflict between humanity and an alien threat known as the Covenant, the series weaves deeply drawn personal stories with action, adventure and a richly imagined vision of the future.',
-  'posterPath': '/nJUHX3XL1jMkk8honUZnUmudFb9.jpg',
-  'name': 'Halo',
-};
-
-final testTvFromCache = TvEntity.watchlist(
-  id: 52814,
-  overview:
-      'Depicting an epic 26th-century conflict between humanity and an alien threat known as the Covenant, the series weaves deeply drawn personal stories with action, adventure and a richly imagined vision of the future.',
-  posterPath: '/nJUHX3XL1jMkk8honUZnUmudFb9.jpg',
-  name: 'Halo',
-);
