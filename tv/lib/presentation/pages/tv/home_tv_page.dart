@@ -57,7 +57,7 @@ class _HomeTvPageState extends State<HomeTvPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 _buildSubHeading(
-                  title: 'Now Playing Tv Today',
+                  title: 'Now Playing',
                   onTap: () =>
                       Navigator.pushNamed(context, NowPlayingTvPage.routeName),
                 ),
