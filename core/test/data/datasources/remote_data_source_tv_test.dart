@@ -21,11 +21,10 @@ void main() {
     mockHttpClient = MockHttpClient();
     dataSource = MovieRemoteDataSourceImpl(client: mockHttpClient);
   });
-
   group('get Popular TVShows', () {
     final testTVShowList =
         TvResponse.fromJson(json.decode(readJson('dummy_data/popular_tv.json')))
-            .results;
+            .tvShowList;
 
     test('should return list of tv shows when response is success (200)',
         () async {
@@ -59,7 +58,7 @@ void main() {
   group('get tv show recommendations', () {
     final testRecommTVShowList = TvResponse.fromJson(
             json.decode(readJson('dummy_data/recommendations_tv.json')))
-        .results;
+        .tvShowList;
     const tId = 1;
 
     test('should return list of TVShow Model when the response code is 200',
@@ -95,7 +94,7 @@ void main() {
   group('search tv shows', () {
     final tSearchResult =
         TvResponse.fromJson(json.decode(readJson('dummy_data/search_tv.json')))
-            .results;
+            .tvShowList;
     const tQuery = 'Avengers';
 
     test('should return list of tv shows when response code is 200', () async {
