@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:core/data/datasources/remote_data_source.dart';
-import 'package:core/data/models/tv_series/tv_detail_model.dart';
 import 'package:core/data/models/tv_series/tv_response.dart';
 import 'package:core/utils/exception.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -22,16 +21,16 @@ void main() {
     dataSource = MovieRemoteDataSourceImpl(client: mockHttpClient);
   });
   group('get Popular TVShows', () {
-    final testTVShowList =
-        TvResponse.fromJson(json.decode(readJson('dummy_data/popular_tv.json')))
-            .tvShowList;
+    final testTVShowList = TvResponse.fromJson(
+            json.decode(readJson('dummy_data/popular_tv_playing.json')))
+        .tvShowList;
 
     test('should return list of tv shows when response is success (200)',
         () async {
       // arrange
       when(mockHttpClient.get(Uri.parse('$baseUrl/tv/popular?$apiKey')))
           .thenAnswer((_) async => http.Response(
-                  readJson('dummy_data/popular_tv.json'), 200,
+                  readJson('dummy_data/popular_tv_playing.json'), 200,
                   headers: {
                     HttpHeaders.contentTypeHeader:
                         'application/json; charset=utf-8',
