@@ -4,8 +4,8 @@ import 'package:movie/domain/entities/movie_entities/movie.dart';
 import 'package:tv/domain/entities/tv_entities/tv.dart';
 
 void main() {
-  var tTvModel = TvModel(
-    genreIds: const [10759, 10765],
+  const tTvModel = TvModel(
+    genreIds: [10759, 10765],
     id: 52814,
     name: 'Halo',
     originalName: 'Halo',

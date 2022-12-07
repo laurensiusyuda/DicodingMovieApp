@@ -4,8 +4,8 @@ import 'package:tv/domain/entities/tv_entities/genre.dart';
 import 'package:tv/domain/entities/tv_entities/tv.dart';
 import 'package:tv/domain/entities/tv_entities/tv_detail.dart';
 
-final tTvModel = TvModel(
-  genreIds: const [10759, 10765],
+const tTvModel = TvModel(
+  genreIds: [10759, 10765],
   id: 52814,
   name: 'Halo',
   originalName: 'Halo',
