@@ -1,6 +1,4 @@
-import 'package:core/data/datasources/local_data_source.dart';
 import 'package:core/data/datasources/local_data_source_tv.dart';
-import 'package:core/data/repositories/repository_impl.dart';
 import 'package:core/utils/exception.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
