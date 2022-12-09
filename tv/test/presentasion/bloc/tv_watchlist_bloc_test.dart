@@ -80,68 +80,70 @@ void main() {
       blocTest<WatchlistTvBloc, StateRequest>(
         'should update watchlist status when add watchlist is success',
         build: () {
-          when(saveTVWatchList.execute(testTvDetail))
+          when(saveTVWatchList.execute(testTVShowDetail))
               .thenAnswer((_) async => const Right(watchlistAddSuccessMessage));
           return watchlistBloc;
         },
-        act: (bloc) => bloc.add(AddWatchlist(testTvDetail)),
+        act: (bloc) => bloc.add(AddWatchlist(testTVShowDetail)),
         expect: () => [
           HasMessage(watchlistAddSuccessMessage),
         ],
         verify: (bloc) {
-          verify(saveTVWatchList.execute(testTvDetail));
-          return AddWatchlist(testTvDetail).props;
+          verify(saveTVWatchList.execute(testTVShowDetail));
+          return AddWatchlist(testTVShowDetail).props;
         },
       );
 
       blocTest<WatchlistTvBloc, StateRequest>(
         'should throw failure message status when add watchlist is unsuccessful',
         build: () {
-          when(saveTVWatchList.execute(testTvDetail)).thenAnswer((_) async =>
-              const Left(DatabaseFailure('can\'t add data to watchlist')));
+          when(saveTVWatchList.execute(testTVShowDetail)).thenAnswer(
+              (_) async =>
+                  const Left(DatabaseFailure('can\'t add data to watchlist')));
           return watchlistBloc;
         },
-        act: (bloc) => bloc.add(AddWatchlist(testTvDetail)),
+        act: (bloc) => bloc.add(AddWatchlist(testTVShowDetail)),
         expect: () => [
           Error('can\'t add data to watchlist'),
         ],
         verify: (bloc) {
-          verify(saveTVWatchList.execute(testTvDetail));
-          return AddWatchlist(testTvDetail).props;
+          verify(saveTVWatchList.execute(testTVShowDetail));
+          return AddWatchlist(testTVShowDetail).props;
         },
       );
 
       blocTest<WatchlistTvBloc, StateRequest>(
         'should update watchlist status when remove watchlist is success',
         build: () {
-          when(removeTVWatchlist.execute(testTvDetail)).thenAnswer(
+          when(removeTVWatchlist.execute(testTVShowDetail)).thenAnswer(
               (_) async => const Right(watchlistRemoveSuccessMessage));
           return watchlistBloc;
         },
-        act: (bloc) => bloc.add(RemoveFromWatchlist(testTvDetail)),
+        act: (bloc) => bloc.add(RemoveFromWatchlist(testTVShowDetail)),
         expect: () => [
           HasMessage(watchlistRemoveSuccessMessage),
         ],
         verify: (bloc) {
-          verify(removeTVWatchlist.execute(testTvDetail));
-          return RemoveFromWatchlist(testTvDetail).props;
+          verify(removeTVWatchlist.execute(testTVShowDetail));
+          return RemoveFromWatchlist(testTVShowDetail).props;
         },
       );
 
       blocTest<WatchlistTvBloc, StateRequest>(
         'should throw failure message status when remove watchlist is unsuccessful',
         build: () {
-          when(removeTVWatchlist.execute(testTvDetail)).thenAnswer((_) async =>
-              const Left(DatabaseFailure('can\'t add data to watchlist')));
+          when(removeTVWatchlist.execute(testTVShowDetail)).thenAnswer(
+              (_) async =>
+                  const Left(DatabaseFailure('can\'t add data to watchlist')));
           return watchlistBloc;
         },
-        act: (bloc) => bloc.add(RemoveFromWatchlist(testTvDetail)),
+        act: (bloc) => bloc.add(RemoveFromWatchlist(testTVShowDetail)),
         expect: () => [
           Error('can\'t add data to watchlist'),
         ],
         verify: (bloc) {
-          verify(removeTVWatchlist.execute(testTvDetail));
-          return RemoveFromWatchlist(testTvDetail).props;
+          verify(removeTVWatchlist.execute(testTVShowDetail));
+          return RemoveFromWatchlist(testTVShowDetail).props;
         },
       );
     },

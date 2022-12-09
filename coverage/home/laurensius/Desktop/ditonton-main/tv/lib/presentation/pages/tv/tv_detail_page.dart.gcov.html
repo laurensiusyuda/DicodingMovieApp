@@ -31,13 +31,13 @@
             <td class="headerValue">lcov.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">107</td>
+            <td class="headerCovTableEntry">95</td>
             <td class="headerCovTableEntry">125</td>
-            <td class="headerCovTableEntryMed">85.6 %</td>
+            <td class="headerCovTableEntryMed">76.0 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2022-12-08 03:17:05</td>
+            <td class="headerValue">2022-12-09 16:59:47</td>
             <td></td>
           </tr>
           <tr><td><img src="../../../../../../../../../glass.png" width=3 height=3 alt=""></td></tr>
@@ -75,7 +75,7 @@
 <a name="17"><span class="lineNum">      17 </span>            : class TvDetailPage extends StatefulWidget {</a>
 <a name="18"><span class="lineNum">      18 </span>            :   static const routeName = '/tv-detail';</a>
 <a name="19"><span class="lineNum">      19 </span>            :   final int id;</a>
-<a name="20"><span class="lineNum">      20 </span><span class="lineCov">          2 :   const TvDetailPage({Key? key, required this.id}) : super(key: key);</span></a>
+<a name="20"><span class="lineNum">      20 </span><span class="lineCov">          3 :   const TvDetailPage({Key? key, required this.id}) : super(key: key);</span></a>
 <a name="21"><span class="lineNum">      21 </span><span class="lineCov">          1 :   @override</span></a>
 <a name="22"><span class="lineNum">      22 </span><span class="lineCov">          1 :   _TVDetailPageState createState() =&gt; _TVDetailPageState();</span></a>
 <a name="23"><span class="lineNum">      23 </span>            : }</a>
@@ -175,31 +175,31 @@
 <a name="117"><span class="lineNum">     117 </span><span class="lineCov">          1 :                               style: kHeading5,</span></a>
 <a name="118"><span class="lineNum">     118 </span>            :                             ),</a>
 <a name="119"><span class="lineNum">     119 </span><span class="lineCov">          1 :                             ElevatedButton(</span></a>
-<a name="120"><span class="lineNum">     120 </span><span class="lineCov">          1 :                               onPressed: () async {</span></a>
-<a name="121"><span class="lineNum">     121 </span><span class="lineCov">          1 :                                 if (!isAddedWatchlist) {</span></a>
+<a name="120"><span class="lineNum">     120 </span><span class="lineNoCov">          0 :                               onPressed: () async {</span></a>
+<a name="121"><span class="lineNum">     121 </span><span class="lineNoCov">          0 :                                 if (!isAddedWatchlist) {</span></a>
 <a name="122"><span class="lineNum">     122 </span>            :                                   context</a>
-<a name="123"><span class="lineNum">     123 </span><span class="lineCov">          1 :                                       .read&lt;WatchlistTvBloc&gt;()</span></a>
-<a name="124"><span class="lineNum">     124 </span><span class="lineCov">          3 :                                       .add(AddWatchlist(tv));</span></a>
+<a name="123"><span class="lineNum">     123 </span><span class="lineNoCov">          0 :                                       .read&lt;WatchlistTvBloc&gt;()</span></a>
+<a name="124"><span class="lineNum">     124 </span><span class="lineNoCov">          0 :                                       .add(AddWatchlist(tv));</span></a>
 <a name="125"><span class="lineNum">     125 </span>            :                                 } else {</a>
 <a name="126"><span class="lineNum">     126 </span>            :                                   context</a>
 <a name="127"><span class="lineNum">     127 </span><span class="lineNoCov">          0 :                                       .read&lt;WatchlistTvBloc&gt;()</span></a>
 <a name="128"><span class="lineNum">     128 </span><span class="lineNoCov">          0 :                                       .add(RemoveFromWatchlist(tv));</span></a>
 <a name="129"><span class="lineNum">     129 </span>            :                                 }</a>
 <a name="130"><span class="lineNum">     130 </span>            : </a>
-<a name="131"><span class="lineNum">     131 </span><span class="lineCov">          1 :                                 final message = context.select&lt;WatchlistTvBloc,</span></a>
-<a name="132"><span class="lineNum">     132 </span><span class="lineCov">          2 :                                     String&gt;((value) =&gt; (value.state</span></a>
-<a name="133"><span class="lineNum">     133 </span><span class="lineCov">          1 :                                         is HasStatus)</span></a>
+<a name="131"><span class="lineNum">     131 </span><span class="lineNoCov">          0 :                                 final message = context.select&lt;WatchlistTvBloc,</span></a>
+<a name="132"><span class="lineNum">     132 </span><span class="lineNoCov">          0 :                                     String&gt;((value) =&gt; (value.state</span></a>
+<a name="133"><span class="lineNum">     133 </span><span class="lineNoCov">          0 :                                         is HasStatus)</span></a>
 <a name="134"><span class="lineNum">     134 </span><span class="lineNoCov">          0 :                                     ? (value.state as HasStatus).status == false</span></a>
 <a name="135"><span class="lineNum">     135 </span>            :                                         ? watchlistAddSuccessMessage</a>
 <a name="136"><span class="lineNum">     136 </span>            :                                         : watchlistRemoveSuccessMessage</a>
-<a name="137"><span class="lineNum">     137 </span><span class="lineCov">          1 :                                     : !isAddedWatchlist</span></a>
+<a name="137"><span class="lineNum">     137 </span><span class="lineNoCov">          0 :                                     : !isAddedWatchlist</span></a>
 <a name="138"><span class="lineNum">     138 </span>            :                                         ? watchlistAddSuccessMessage</a>
 <a name="139"><span class="lineNum">     139 </span>            :                                         : watchlistRemoveSuccessMessage);</a>
 <a name="140"><span class="lineNum">     140 </span>            : </a>
-<a name="141"><span class="lineNum">     141 </span><span class="lineCov">          1 :                                 if (message == watchlistAddSuccessMessage ||</span></a>
+<a name="141"><span class="lineNum">     141 </span><span class="lineNoCov">          0 :                                 if (message == watchlistAddSuccessMessage ||</span></a>
 <a name="142"><span class="lineNum">     142 </span><span class="lineNoCov">          0 :                                     message == watchlistRemoveSuccessMessage) {</span></a>
-<a name="143"><span class="lineNum">     143 </span><span class="lineCov">          2 :                                   ScaffoldMessenger.of(context).showSnackBar(</span></a>
-<a name="144"><span class="lineNum">     144 </span><span class="lineCov">          2 :                                       SnackBar(content: Text(message)));</span></a>
+<a name="143"><span class="lineNum">     143 </span><span class="lineNoCov">          0 :                                   ScaffoldMessenger.of(context).showSnackBar(</span></a>
+<a name="144"><span class="lineNum">     144 </span><span class="lineNoCov">          0 :                                       SnackBar(content: Text(message)));</span></a>
 <a name="145"><span class="lineNum">     145 </span>            :                                 } else {</a>
 <a name="146"><span class="lineNum">     146 </span><span class="lineNoCov">          0 :                                   showDialog(</span></a>
 <a name="147"><span class="lineNum">     147 </span>            :                                       context: context,</a>
@@ -209,7 +209,7 @@
 <a name="151"><span class="lineNum">     151 </span>            :                                         );</a>
 <a name="152"><span class="lineNum">     152 </span>            :                                       });</a>
 <a name="153"><span class="lineNum">     153 </span>            :                                 }</a>
-<a name="154"><span class="lineNum">     154 </span><span class="lineCov">          2 :                                 isAddedWatchlist = !isAddedWatchlist;</span></a>
+<a name="154"><span class="lineNum">     154 </span><span class="lineNoCov">          0 :                                 isAddedWatchlist = !isAddedWatchlist;</span></a>
 <a name="155"><span class="lineNum">     155 </span>            :                               },</a>
 <a name="156"><span class="lineNum">     156 </span><span class="lineCov">          1 :                               child: Row(</span></a>
 <a name="157"><span class="lineNum">     157 </span>            :                                 mainAxisSize: MainAxisSize.min,</a>

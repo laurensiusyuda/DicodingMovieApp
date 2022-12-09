@@ -1,13 +1,6 @@
-import 'dart:convert';
-
-import 'package:core/data/models/movie_models/movie_model.dart';
-import 'package:core/data/models/movie_models/movie_response.dart';
 import 'package:core/data/models/tv_series/tv_model.dart';
 import 'package:core/data/models/tv_series/tv_response.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import '../../dummy_data/dummy_objects_movies.dart';
-import '../../json_reader.dart';
 
 void main() {
   const tTvModel = TvModel(

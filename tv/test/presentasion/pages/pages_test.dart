@@ -268,7 +268,7 @@ void main() {
   testWidgets(
       'Watchlist button should display add icon when Tv not added to watchlist',
       (WidgetTester tester) async {
-    when(() => fakeDetailTvBloc.state).thenReturn(HasData(testTvDetail));
+    when(() => fakeDetailTvBloc.state).thenReturn(HasData(testTVShowDetail));
 
     when(() => fakeWatchlistTvBloc.state).thenReturn(const HasStatus(false));
 
@@ -284,7 +284,7 @@ void main() {
   testWidgets(
       'Watchlist button should dispay check icon when Tv is added to wathclist',
       (WidgetTester tester) async {
-    when(() => fakeDetailTvBloc.state).thenReturn(HasData(testTvDetail));
+    when(() => fakeDetailTvBloc.state).thenReturn(HasData(testTVShowDetail));
     when(() => fakeWatchlistTvBloc.state).thenReturn(const HasStatus(true));
     when(() => fakeRecommendationTvBloc.state).thenReturn(HasData(testTvList));
     final checkIconFinder = find.byIcon(Icons.check);
@@ -293,27 +293,21 @@ void main() {
     expect(checkIconFinder, findsOneWidget);
   });
 
-  testWidgets(
-      'Watchlist button should display Snackbar when added to watchlist',
+  // ysyuh
+
+  testWidgets('Page should display progress bar when start to retrieve data',
       (WidgetTester tester) async {
-    when(() => fakeDetailTvBloc.state).thenReturn(HasData(testTvDetail));
+    when(() => fakeDetailTvBloc.state).thenReturn(Loading());
+    when(() => fakeWatchlistTvBloc.state).thenReturn(Loading());
+    when(() => fakeRecommendationTvBloc.state).thenReturn(Loading());
 
-    when(() => fakeRecommendationTvBloc.state).thenReturn(HasData(testTvList));
+    final progressbarFinder = find.byType(CircularProgressIndicator);
 
-    when(() => fakeWatchlistTvBloc.state).thenReturn(const HasStatus(false));
-    when(() => fakeWatchlistTvBloc.state)
-        .thenReturn(const HasMessage('Added to Watchlist'));
-
-    final watchlistButton = find.byType(ElevatedButton);
-
-    await tester.pumpWidget(_makeTestableWidgetDetail(TvDetailPage(id: 1)));
-
-    expect(find.byIcon(Icons.add), findsOneWidget);
-
-    await tester.tap(watchlistButton);
+    await tester.pumpWidget(_makeTestableWidgetDetail(const TvDetailPage(
+      id: 1,
+    )));
     await tester.pump();
 
-    expect(find.byType(SnackBar), findsOneWidget);
-    expect(find.text('Added to Watchlist'), findsOneWidget);
+    expect(progressbarFinder, findsOneWidget);
   });
 }

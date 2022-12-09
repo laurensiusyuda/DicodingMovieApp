@@ -28,13 +28,14 @@ void main() {
   blocTest<TvDetailBloc, StateRequest>(
     'should emit [Loading, HasData] when data is gotten successfully',
     build: () {
-      when(usecase.execute(tId)).thenAnswer((_) async => Right(testTvDetail));
+      when(usecase.execute(tId))
+          .thenAnswer((_) async => Right(testTVShowDetail));
       return tvBloc;
     },
     act: (bloc) => bloc.add(FetchTvDetail(tId)),
     expect: () => [
       Loading(),
-      HasData(testTvDetail),
+      HasData(testTVShowDetail),
     ],
     verify: (bloc) {
       verify(usecase.execute(tId));

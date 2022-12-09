@@ -35,22 +35,22 @@ void main() {
   });
   test('should save Tv to the repository', () async {
     // arrange
-    when(mockTvRepository.saveTvWatchlist(testTvDetail))
+    when(mockTvRepository.saveTvWatchlist(testTVShowDetail))
         .thenAnswer((_) async => const Right('Added to Watchlist'));
     // act
-    final result = await usecaseSaveWatchlist.execute(testTvDetail);
+    final result = await usecaseSaveWatchlist.execute(testTVShowDetail);
     // assert
-    verify(mockTvRepository.saveTvWatchlist(testTvDetail));
+    verify(mockTvRepository.saveTvWatchlist(testTVShowDetail));
     expect(result, const Right('Added to Watchlist'));
   });
   test('should remove watchlist Tv from repository', () async {
     // arrange
-    when(mockTvRepository.removeTvWatchlist(testTvDetail))
+    when(mockTvRepository.removeTvWatchlist(testTVShowDetail))
         .thenAnswer((_) async => const Right('Removed from watchlist'));
     // act
-    final result = await usecaseRemove.execute(testTvDetail);
+    final result = await usecaseRemove.execute(testTVShowDetail);
     // assert
-    verify(mockTvRepository.removeTvWatchlist(testTvDetail));
+    verify(mockTvRepository.removeTvWatchlist(testTVShowDetail));
     expect(result, const Right('Removed from watchlist'));
   });
   test('should get list of Tv from the repository', () async {

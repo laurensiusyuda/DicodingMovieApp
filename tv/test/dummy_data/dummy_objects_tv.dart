@@ -1,10 +1,12 @@
+import 'package:core/data/models/tv_series/tv_detail_model.dart';
+import 'package:core/data/models/tv_series/tv_genre_model.dart';
 import 'package:core/data/models/tv_series/tv_model.dart';
 import 'package:core/data/models/tv_series/tv_table.dart';
 import 'package:tv/domain/entities/tv_entities/genre.dart';
 import 'package:tv/domain/entities/tv_entities/tv.dart';
 import 'package:tv/domain/entities/tv_entities/tv_detail.dart';
 
-final tTvModel = TvModel(
+const tTvModel = TvModel(
   genreIds: const [10759, 10765],
   id: 52814,
   name: 'Halo',
@@ -45,22 +47,31 @@ final testTv = TvEntity(
 
 final testTvList = [testTv];
 
-final testTvDetail = TvDetailEntity(
-  adult: false,
-  backdropPath: 'backdropPath',
-  genres: [const TvGenreEntity(id: 1, name: 'Action')],
-  id: 1,
+const testTvDetail = TvDetailResponse(
+  backdropPath: '',
+  firstAirDate: '',
+  genres: [TvGenreModel(id: 1, name: 'Action')],
+  id: 2,
+  episodeRunTime: [],
+  homepage: "https://google.com",
+  numberOfEpisodes: 34,
   name: 'name',
-  numberOfEpisodes: 1,
+  numberOfSeasons: 2,
+  originalLanguage: 'en',
+  originalName: 'name',
   overview: 'overview',
-  popularity: 1,
-  posterPath: 'posterPath',
+  popularity: 12.323,
+  posterPath: '',
   status: 'status',
   tagline: 'tagline',
-  type: 'type',
-  voteAverage: 1,
+  type: 'Scripted',
+  voteAverage: 3,
+  voteCount: 3,
 );
-
+final testTVShowDetail = testTvDetail.toEntity();
+final testTVShowTable = TvTable.fromEntity(testTVShowDetail);
+final testTVShowTableList = <TvTable>[testTVShowTable];
+final testWatchlistTVShow = [testTVShowTable.toEntity()];
 final testWatchlistTv = TvEntity.watchlist(
   id: 1,
   overview: 'overview',

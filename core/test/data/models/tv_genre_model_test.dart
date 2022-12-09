@@ -27,4 +27,10 @@ void main() {
     final result = tGenreModel.toJson();
     expect(result, tGenreJson);
   });
+
+  test('should return a valid model from JSON', () async {
+    final result = TvGenreModel.fromJson(tGenreJson);
+    // assert
+    expect(result, tGenreModel);
+  });
 }
