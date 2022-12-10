@@ -1,20 +1,21 @@
 import 'package:core/data/models/tv_series/tv_model.dart';
+import 'package:equatable/equatable.dart';
 
-class TvResponse {
-  final List<TvModel> tvShowList;
+class TvResponse extends Equatable {
+  final List<TvModel> tvList;
 
-  TvResponse({required this.tvShowList});
+  TvResponse({required this.tvList});
 
   factory TvResponse.fromJson(Map<String, dynamic> json) => TvResponse(
-        tvShowList: List<TvModel>.from((json["results"] as List)
+        tvList: List<TvModel>.from((json["results"] as List)
             .map((x) => TvModel.fromJson(x))
             .where((element) => element.posterPath != null)),
       );
 
   Map<String, dynamic> toJson() => {
-        "results": List<dynamic>.from(tvShowList.map((x) => x.toJson())),
+        "results": List<dynamic>.from(tvList.map((x) => x.toJson())),
       };
 
   @override
-  List<Object> get props => [tvShowList];
+  List<Object> get props => [tvList];
 }

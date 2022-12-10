@@ -20,10 +20,10 @@ void main() {
   test('should get Tv detail from the repository', () async {
     // arrange
     when(mockTvRepository.getTvDetail(tId))
-        .thenAnswer((_) async => Right(testTVShowDetail));
+        .thenAnswer((_) async => Right(testTvDetail));
     // act
     final result = await usecase.execute(tId);
     // assert
-    expect(result, Right(testTVShowDetail));
+    expect(result, Right(testTvDetail));
   });
 }

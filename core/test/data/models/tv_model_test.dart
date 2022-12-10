@@ -4,29 +4,31 @@ import 'package:tv/domain/entities/tv_entities/tv.dart';
 
 void main() {
   const tTvModel = TvModel(
-    genreIds: [10759, 10765],
-    id: 52814,
-    name: 'Halo',
-    originalName: 'Halo',
-    overview:
-        'Depicting an epic 26th-century conflict between humanity and an alien threat known as the Covenant, the series weaves deeply drawn personal stories with action, adventure and a richly imagined vision of the future.',
-    popularity: 10330.342,
-    posterPath: '/nJUHX3XL1jMkk8honUZnUmudFb9.jpg',
-    voteAverage: 8.7,
-    voteCount: 420,
+    backdropPath: 'backdropPath',
+    genreIds: [1, 2, 3, 4],
+    id: 1,
+    originalName: 'originalName',
+    overview: 'overview',
+    popularity: 1,
+    posterPath: 'posterPath',
+    firstAirDate: 'firstAirDate',
+    name: 'name',
+    voteAverage: 1,
+    voteCount: 1,
   );
 
   final tTv = TvEntity(
-    genreIds: const [10759, 10765],
-    id: 52814,
-    name: 'Halo',
-    originalName: 'Halo',
-    overview:
-        'Depicting an epic 26th-century conflict between humanity and an alien threat known as the Covenant, the series weaves deeply drawn personal stories with action, adventure and a richly imagined vision of the future.',
-    popularity: 10330.342,
-    posterPath: '/nJUHX3XL1jMkk8honUZnUmudFb9.jpg',
-    voteAverage: 8.7,
-    voteCount: 420,
+    backdropPath: 'backdropPath',
+    genreIds: [1, 2, 3, 4],
+    id: 1,
+    originalName: 'originalName',
+    overview: 'overview',
+    popularity: 1,
+    posterPath: 'posterPath',
+    firstAirDate: 'firstAirDate',
+    name: 'name',
+    voteAverage: 1,
+    voteCount: 1,
   );
 
   test('should be a subclass of Movie entity', () async {

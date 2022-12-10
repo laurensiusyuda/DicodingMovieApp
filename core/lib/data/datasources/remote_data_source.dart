@@ -39,6 +39,9 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
   static const apiKey = 'api_key=2174d146bb9c0eab47529b2e77d6b526';
   static const baseUrl = 'https://api.themoviedb.org/3';
 
+  static const API_KEY = 'api_key=49b28f2482f9952f0a311cd6e996daba';
+  static const BASE_URL = 'https://api.themoviedb.org/3';
+
   final http.Client client;
 
   MovieRemoteDataSourceImpl({required this.client});
@@ -118,7 +121,7 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
   Future<List<TvModel>> getPopularTv() async {
     final response = await client.get(Uri.parse('$baseUrl/tv/popular?$apiKey'));
     if (response.statusCode == 200) {
-      return TvResponse.fromJson(json.decode(response.body)).tvShowList;
+      return TvResponse.fromJson(json.decode(response.body)).tvList;
     } else {
       throw ServerException();
     }
@@ -129,7 +132,7 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
     final response =
         await client.get(Uri.parse('$baseUrl/tv/top_rated?$apiKey'));
     if (response.statusCode == 200) {
-      return TvResponse.fromJson(json.decode(response.body)).tvShowList;
+      return TvResponse.fromJson(json.decode(response.body)).tvList;
     } else {
       throw ServerException();
     }
@@ -138,9 +141,9 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
   @override
   Future<List<TvModel>> getNowPlayingTv() async {
     final response =
-        await client.get(Uri.parse('$baseUrl/tv/airing_today?$apiKey'));
+        await client.get(Uri.parse('$baseUrl/tv/on_the_air?$apiKey'));
     if (response.statusCode == 200) {
-      return TvResponse.fromJson(json.decode(response.body)).tvShowList;
+      return TvResponse.fromJson(json.decode(response.body)).tvList;
     } else {
       throw ServerException();
     }
@@ -151,7 +154,7 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
     final response =
         await client.get(Uri.parse('$baseUrl/search/tv?$apiKey&query=$query'));
     if (response.statusCode == 200) {
-      return TvResponse.fromJson(json.decode(response.body)).tvShowList;
+      return TvResponse.fromJson(json.decode(response.body)).tvList;
     } else {
       throw ServerException();
     }
@@ -173,7 +176,7 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
     final response =
         await client.get(Uri.parse('$baseUrl/tv/$id/recommendations?$apiKey'));
     if (response.statusCode == 200) {
-      return TvResponse.fromJson(json.decode(response.body)).tvShowList;
+      return TvResponse.fromJson(json.decode(response.body)).tvList;
     } else {
       throw ServerException();
     }

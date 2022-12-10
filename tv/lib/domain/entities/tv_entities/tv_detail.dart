@@ -1,47 +1,41 @@
 import 'package:tv/domain/entities/tv_entities/genre.dart';
 
 class TvDetailEntity {
-  TvDetailEntity({
+  const TvDetailEntity({
     required this.backdropPath,
-    required this.firstAirDate,
     required this.genres,
     required this.id,
-    required this.name,
+    required this.originalName,
     required this.overview,
-    required this.episodeRunTime,
     required this.posterPath,
-    required this.numberOfEpisodes,
-    required this.numberOfSeasons,
+    required this.firstAirDate,
+    required this.name,
     required this.voteAverage,
     required this.voteCount,
   });
 
   final String? backdropPath;
-  final String firstAirDate;
   final List<TvGenreEntity> genres;
-  final List<int> episodeRunTime;
   final int id;
-  final String name;
+  final String originalName;
   final String overview;
   final String posterPath;
-  final int numberOfEpisodes;
-  final int numberOfSeasons;
+  final String firstAirDate;
+  final String name;
   final double voteAverage;
   final int voteCount;
 
   @override
   List<Object?> get props => [
         backdropPath,
-        firstAirDate,
         genres,
         id,
-        name,
+        originalName,
         overview,
         posterPath,
-        episodeRunTime,
-        numberOfEpisodes,
-        numberOfSeasons,
+        firstAirDate,
+        name,
         voteAverage,
-        voteCount
+        voteCount,
       ];
 }

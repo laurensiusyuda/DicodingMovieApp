@@ -268,7 +268,7 @@ void main() {
   testWidgets(
       'Watchlist button should display add icon when Tv not added to watchlist',
       (WidgetTester tester) async {
-    when(() => fakeDetailTvBloc.state).thenReturn(HasData(testTVShowDetail));
+    when(() => fakeDetailTvBloc.state).thenReturn(HasData(testTvDetail));
 
     when(() => fakeWatchlistTvBloc.state).thenReturn(const HasStatus(false));
 
@@ -284,7 +284,7 @@ void main() {
   testWidgets(
       'Watchlist button should dispay check icon when Tv is added to wathclist',
       (WidgetTester tester) async {
-    when(() => fakeDetailTvBloc.state).thenReturn(HasData(testTVShowDetail));
+    when(() => fakeDetailTvBloc.state).thenReturn(HasData(testTvDetail));
     when(() => fakeWatchlistTvBloc.state).thenReturn(const HasStatus(true));
     when(() => fakeRecommendationTvBloc.state).thenReturn(HasData(testTvList));
     final checkIconFinder = find.byIcon(Icons.check);

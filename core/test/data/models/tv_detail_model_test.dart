@@ -9,7 +9,6 @@ main() {
     type: 'type',
     numberOfEpisodes: 1,
     numberOfSeasons: 1,
-    episodeRunTime: [1],
     firstAirDate: 'firstAirDate',
     genres: [],
     id: 1,

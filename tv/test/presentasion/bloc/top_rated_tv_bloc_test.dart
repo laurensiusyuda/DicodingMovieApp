@@ -22,15 +22,18 @@ void main() {
   });
 
   final tTv = TvEntity(
-    genreIds: const [1, 2, 3],
-    id: 1,
-    name: 'name',
-    originalName: 'originalName',
-    overview: 'overview',
-    popularity: 1,
-    posterPath: 'posterPath',
-    voteAverage: 1,
-    voteCount: 1,
+    backdropPath: '/zGLHX92Gk96O1DJvLil7ObJTbaL.jpg',
+    genreIds: [14, 12, 28],
+    id: 338953,
+    originalName: 'Fantastic Beasts: The Secrets of Dumbledore',
+    overview:
+        'Professor Albus Dumbledore knows the powerful, dark wizard Gellert Grindelwald is moving to seize control of the wizarding world. Unable to stop him alone, he entrusts magizoologist Newt Scamander to lead an intrepid team of wizards and witches. They soon encounter an array of old and new beasts as they clash with Grindelwald\'s growing legion of followers.',
+    popularity: 3456.961,
+    posterPath: '/jrgifaYeUtTnaH7NF5Drkgjg2MB.jpg',
+    firstAirDate: '2022-04-06',
+    name: 'Fantastic Beasts: The Secrets of Dumbledore',
+    voteAverage: 6.9,
+    voteCount: 1795,
   );
 
   final tTvList = <TvEntity>[tTv];

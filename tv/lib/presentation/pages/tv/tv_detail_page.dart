@@ -166,9 +166,6 @@ class DetailContent extends StatelessWidget {
                             Text(
                               _showGenres(tv.genres),
                             ),
-                            Text(
-                              _showDuration(tv.numberOfEpisodes),
-                            ),
                             Row(
                               children: [
                                 RatingBarIndicator(

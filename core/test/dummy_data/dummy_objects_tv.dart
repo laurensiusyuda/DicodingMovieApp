@@ -6,72 +6,88 @@ import 'package:tv/domain/entities/tv_entities/genre.dart';
 import 'package:tv/domain/entities/tv_entities/tv.dart';
 import 'package:tv/domain/entities/tv_entities/tv_detail.dart';
 
+final tId = 1;
+
 const tTvModel = TvModel(
-  genreIds: [10759, 10765],
-  id: 52814,
-  name: 'Halo',
-  originalName: 'Halo',
+  backdropPath: '/zGLHX92Gk96O1DJvLil7ObJTbaL.jpg',
+  genreIds: [14, 12, 28],
+  id: 338953,
+  originalName: 'Fantastic Beasts: The Secrets of Dumbledore',
   overview:
-      'Depicting an epic 26th-century conflict between humanity and an alien threat known as the Covenant, the series weaves deeply drawn personal stories with action, adventure and a richly imagined vision of the future.',
-  popularity: 10330.342,
-  posterPath: '/nJUHX3XL1jMkk8honUZnUmudFb9.jpg',
-  voteAverage: 8.7,
-  voteCount: 420,
+      'Professor Albus Dumbledore knows the powerful, dark wizard Gellert Grindelwald is moving to seize control of the wizarding world. Unable to stop him alone, he entrusts magizoologist Newt Scamander to lead an intrepid team of wizards and witches. They soon encounter an array of old and new beasts as they clash with Grindelwald\'s growing legion of followers.',
+  popularity: 3456.961,
+  posterPath: '/jrgifaYeUtTnaH7NF5Drkgjg2MB.jpg',
+  firstAirDate: '2022-04-06',
+  name: 'Fantastic Beasts: The Secrets of Dumbledore',
+  voteAverage: 6.9,
+  voteCount: 1795,
 );
 
 final tTv = TvEntity(
-  genreIds: const [10759, 10765],
-  id: 52814,
-  name: 'Halo',
-  originalName: 'Halo',
+  backdropPath: '/zGLHX92Gk96O1DJvLil7ObJTbaL.jpg',
+  genreIds: [14, 12, 28],
+  id: 338953,
+  originalName: 'Fantastic Beasts: The Secrets of Dumbledore',
   overview:
-      'Depicting an epic 26th-century conflict between humanity and an alien threat known as the Covenant, the series weaves deeply drawn personal stories with action, adventure and a richly imagined vision of the future.',
-  popularity: 10330.342,
-  posterPath: '/nJUHX3XL1jMkk8honUZnUmudFb9.jpg',
-  voteAverage: 8.7,
-  voteCount: 420,
+      'Professor Albus Dumbledore knows the powerful, dark wizard Gellert Grindelwald is moving to seize control of the wizarding world. Unable to stop him alone, he entrusts magizoologist Newt Scamander to lead an intrepid team of wizards and witches. They soon encounter an array of old and new beasts as they clash with Grindelwald\'s growing legion of followers.',
+  popularity: 3456.961,
+  posterPath: '/jrgifaYeUtTnaH7NF5Drkgjg2MB.jpg',
+  firstAirDate: '2022-04-06',
+  name: 'Fantastic Beasts: The Secrets of Dumbledore',
+  voteAverage: 6.9,
+  voteCount: 1795,
 );
 
 final testTv = TvEntity(
-  genreIds: const [10759, 10765],
-  id: 52814,
-  name: 'Halo',
-  originalName: 'Halo',
+  backdropPath: '/zGLHX92Gk96O1DJvLil7ObJTbaL.jpg',
+  genreIds: [14, 12, 28],
+  id: 338953,
+  originalName: 'Fantastic Beasts: The Secrets of Dumbledore',
   overview:
-      'Depicting an epic 26th-century conflict between humanity and an alien threat known as the Covenant, the series weaves deeply drawn personal stories with action, adventure and a richly imagined vision of the future.',
-  popularity: 10330.342,
-  posterPath: '/nJUHX3XL1jMkk8honUZnUmudFb9.jpg',
-  voteAverage: 8.7,
-  voteCount: 420,
+      'Professor Albus Dumbledore knows the powerful, dark wizard Gellert Grindelwald is moving to seize control of the wizarding world. Unable to stop him alone, he entrusts magizoologist Newt Scamander to lead an intrepid team of wizards and witches. They soon encounter an array of old and new beasts as they clash with Grindelwald\'s growing legion of followers.',
+  popularity: 3456.961,
+  posterPath: '/jrgifaYeUtTnaH7NF5Drkgjg2MB.jpg',
+  firstAirDate: '2022-04-06',
+  name: 'Fantastic Beasts: The Secrets of Dumbledore',
+  voteAverage: 6.9,
+  voteCount: 1795,
+);
+
+const testTvDetail = TvDetailEntity(
+  backdropPath: 'backdropPath',
+  genres: [TvGenreEntity(id: 1, name: 'Action')],
+  id: 1,
+  originalName: 'originalName',
+  overview: 'overview',
+  posterPath: 'posterPath',
+  firstAirDate: 'firstAirDate',
+  name: 'name',
+  voteAverage: 1,
+  voteCount: 1,
 );
 
 final testTvList = [testTv];
 
-final testTvDetail = TvDetailResponse(
-  backdropPath: '',
-  firstAirDate: '',
+const tTvResponse = TvDetailResponse(
+  backdropPath: 'backdropPath',
   genres: [TvGenreModel(id: 1, name: 'Action')],
-  id: 2,
-  episodeRunTime: [],
   homepage: "https://google.com",
-  numberOfEpisodes: 34,
-  name: 'name',
-  numberOfSeasons: 2,
+  id: 1,
   originalLanguage: 'en',
-  originalName: 'name',
+  originalName: 'originalName',
   overview: 'overview',
-  popularity: 12.323,
-  posterPath: '',
-  status: 'status',
-  tagline: 'tagline',
-  type: 'Scripted',
-  voteAverage: 3,
-  voteCount: 3,
+  popularity: 1,
+  posterPath: 'posterPath',
+  firstAirDate: 'firstAirDate',
+  status: 'Status',
+  numberOfEpisodes: 1,
+  numberOfSeasons: 1,
+  tagline: 'Tagline',
+  name: 'name',
+  type: 'type',
+  voteAverage: 1,
+  voteCount: 1,
 );
-
-final testTVShowTableList = <TvTable>[testTVShowTable];
-
-final testWatchlistTVShow = [testTVShowTable.toEntity()];
 final testWatchlistTv = TvEntity.watchlist(
   id: 1,
   overview: 'overview',
@@ -92,28 +108,3 @@ final testTvMap = {
   'posterPath': 'posterPath',
   'name': 'name',
 };
-
-const tId = 1;
-const tTvResponse = TvDetailResponse(
-  backdropPath: '',
-  firstAirDate: '',
-  genres: [TvGenreModel(id: 1, name: 'Action')],
-  id: 2,
-  episodeRunTime: [],
-  homepage: "https://google.com",
-  numberOfEpisodes: 34,
-  name: 'name',
-  numberOfSeasons: 2,
-  originalLanguage: 'en',
-  originalName: 'name',
-  overview: 'overview',
-  popularity: 12.323,
-  posterPath: '',
-  status: 'status',
-  tagline: 'tagline',
-  type: 'Scripted',
-  voteAverage: 3,
-  voteCount: 3,
-);
-final testTVShowDetail = tTvResponse.toEntity();
-final testTVShowTable = TvTable.fromEntity(testTVShowDetail);

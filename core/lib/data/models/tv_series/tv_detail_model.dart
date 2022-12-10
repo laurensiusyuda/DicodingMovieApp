@@ -6,7 +6,6 @@ import 'tv_genre_model.dart';
 class TvDetailResponse extends Equatable {
   const TvDetailResponse({
     required this.backdropPath,
-    required this.episodeRunTime,
     required this.firstAirDate,
     required this.genres,
     required this.homepage,
@@ -27,7 +26,6 @@ class TvDetailResponse extends Equatable {
   });
 
   final String backdropPath;
-  final List<int> episodeRunTime;
   final String firstAirDate;
   final List<TvGenreModel> genres;
   final String homepage;
@@ -49,10 +47,10 @@ class TvDetailResponse extends Equatable {
   factory TvDetailResponse.fromJson(Map<String, dynamic> json) =>
       TvDetailResponse(
         backdropPath: json["backdrop_path"],
-        episodeRunTime: List<int>.from(json["episode_run_time"].map((x) => x)),
         firstAirDate: json["first_air_date"],
         genres: List<TvGenreModel>.from(
-            json["genres"].map((x) => TvGenreModel.fromJson(x))),
+          json["genres"].map((x) => TvGenreModel.fromJson(x)),
+        ),
         homepage: json["homepage"],
         id: json["id"],
         name: json["name"],
@@ -72,7 +70,6 @@ class TvDetailResponse extends Equatable {
 
   Map<String, dynamic> toJson() => {
         "backdrop_path": backdropPath,
-        "episode_run_time": episodeRunTime,
         "first_air_date": firstAirDate,
         "genres": List<dynamic>.from(genres.map((x) => x.toJson())),
         "homepage": homepage,
@@ -93,24 +90,21 @@ class TvDetailResponse extends Equatable {
       };
 
   TvDetailEntity toEntity() => TvDetailEntity(
-        backdropPath: backdropPath,
-        firstAirDate: firstAirDate,
-        episodeRunTime: episodeRunTime,
-        genres: genres.map((genre) => genre.toEntity()).toList(),
-        id: id,
-        name: name,
-        overview: overview,
-        posterPath: posterPath,
-        numberOfEpisodes: numberOfEpisodes,
-        numberOfSeasons: numberOfSeasons,
-        voteAverage: voteAverage,
-        voteCount: voteCount,
+        backdropPath: this.backdropPath,
+        genres: this.genres.map((genre) => genre.toEntity()).toList(),
+        id: this.id,
+        originalName: this.originalName,
+        overview: this.overview,
+        posterPath: this.posterPath,
+        firstAirDate: this.firstAirDate,
+        name: this.name,
+        voteAverage: this.voteAverage,
+        voteCount: this.voteCount,
       );
 
   @override
   List<Object> get props => [
         backdropPath,
-        episodeRunTime,
         firstAirDate,
         genres,
         homepage,
