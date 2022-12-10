@@ -1,6 +1,5 @@
 import 'package:core/data/models/tv_series/tv_model.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:movie/domain/entities/movie_entities/movie.dart';
 import 'package:tv/domain/entities/tv_entities/tv.dart';
 
 void main() {
