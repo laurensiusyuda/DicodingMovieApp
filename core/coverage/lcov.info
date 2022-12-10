@@ -1,5 +1,5 @@
 SF:lib/data/models/movie_models/movie_model.dart
-DA:5,9
+DA:5,8
 DA:35,4
 DA:36,2
 DA:37,2
@@ -75,7 +75,7 @@ LF:9
 LH:9
 end_of_record
 SF:lib/data/models/movie_models/movie_table.dart
-DA:12,7
+DA:12,6
 DA:19,2
 DA:20,1
 DA:21,1
