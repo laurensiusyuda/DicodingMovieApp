@@ -1,6 +1,7 @@
+import 'package:equatable/equatable.dart';
 import 'package:tv/domain/entities/tv_entities/genre.dart';
 
-class TvDetailEntity {
+class TvDetailEntity extends Equatable {
   const TvDetailEntity({
     required this.backdropPath,
     required this.genres,

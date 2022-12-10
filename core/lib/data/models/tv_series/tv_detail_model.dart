@@ -1,7 +1,6 @@
+import 'package:core/data/models/tv_series/tv_genre_model.dart';
 import 'package:equatable/equatable.dart';
 import 'package:tv/domain/entities/tv_entities/tv_detail.dart';
-
-import 'tv_genre_model.dart';
 
 class TvDetailResponse extends Equatable {
   const TvDetailResponse({
@@ -89,18 +88,20 @@ class TvDetailResponse extends Equatable {
         "vote_count": voteCount,
       };
 
-  TvDetailEntity toEntity() => TvDetailEntity(
-        backdropPath: this.backdropPath,
-        genres: this.genres.map((genre) => genre.toEntity()).toList(),
-        id: this.id,
-        originalName: this.originalName,
-        overview: this.overview,
-        posterPath: this.posterPath,
-        firstAirDate: this.firstAirDate,
-        name: this.name,
-        voteAverage: this.voteAverage,
-        voteCount: this.voteCount,
-      );
+  TvDetailEntity toEntity() {
+    return TvDetailEntity(
+      backdropPath: backdropPath,
+      genres: genres.map((genre) => genre.toEntity()).toList(),
+      id: id,
+      originalName: originalName,
+      overview: overview,
+      posterPath: posterPath,
+      firstAirDate: firstAirDate,
+      name: name,
+      voteAverage: voteAverage,
+      voteCount: voteCount,
+    );
+  }
 
   @override
   List<Object> get props => [

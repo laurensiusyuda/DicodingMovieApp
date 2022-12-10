@@ -6,6 +6,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:movie/presentation/bloc/movie/movie_detail/movie_detail_bloc.dart';
 import 'package:movie/presentation/bloc/movie/movie_detail/movie_detail_event.dart';
+import 'package:movie/presentation/bloc/movie/now_movie_playing/now_movie_playing_bloc.dart';
+import 'package:movie/presentation/bloc/movie/now_movie_playing/now_movie_playing_event.dart';
 import 'package:movie/presentation/bloc/movie/popular_movie/popular_movie_bloc.dart';
 import 'package:movie/presentation/bloc/movie/popular_movie/popular_movie_event.dart';
 import 'package:movie/presentation/bloc/movie/recomendation_movie/recomendation_movie_bloc.dart';
@@ -15,11 +17,19 @@ import 'package:movie/presentation/bloc/movie/top_rated_movie/top_rated_movie_ev
 import 'package:movie/presentation/bloc/movie/watchlist_movie/watchlist_movie_bloc.dart';
 import 'package:movie/presentation/bloc/movie/watchlist_movie/watchlist_movie_event.dart';
 import 'package:movie/presentation/pages/movie/movie_detail_page.dart';
+import 'package:movie/presentation/pages/movie/now_playing_movie.dart';
 import 'package:movie/presentation/pages/movie/popular_movies_page.dart';
 import 'package:movie/presentation/pages/movie/top_rated_movies_page.dart';
 import 'package:movie/presentation/widget/Movie_card_list.dart';
 
 import '../../dummy_data/dummy_objects.dart';
+
+class FakeNowPlayingMoviesEvent extends Fake implements NowPlayingEvent {}
+
+class FakeNowPlayingState extends Fake implements NowPlayingEvent {}
+
+class FakeNowPlayingBloc extends MockBloc<NowPlayingEvent, StateRequest>
+    implements NowPlayingMoviesBloc {}
 
 //Detail
 class FakeDetailMoviesEvent extends Fake implements MovieDetailEvent {}
@@ -65,12 +75,16 @@ class FakePopularMoviesBloc extends MockBloc<PopularEvent, StateRequest>
 void main() {
   late FakeTopRatedMoviesBloc topRatedMoviesBloc;
   late FakePopularMoviesBloc fakePopularMoviesBloc;
-
+  late FakeNowPlayingBloc fakeNowPlayingBloc;
   late FakeDetailMoviesBloc fakeDetailMoviesBloc;
   late FakeWatchlistMoviesBloc fakeWatchlistMoviesBloc;
   late FakeRecommendationMoviesBloc fakeRecommendationMoviesBloc;
 
   setUpAll(() {
+    fakeNowPlayingBloc = FakeNowPlayingBloc();
+    registerFallbackValue(FakeNowPlayingMoviesEvent());
+    registerFallbackValue(FakeNowPlayingState());
+
     topRatedMoviesBloc = FakeTopRatedMoviesBloc();
     registerFallbackValue(FakeTopRatedMoviesEvent());
     registerFallbackValue(FakeTopRatedMoviesState());
@@ -78,6 +92,7 @@ void main() {
     fakePopularMoviesBloc = FakePopularMoviesBloc();
     registerFallbackValue(FakePopularMoviesEvent());
     registerFallbackValue(FakePopularMoviesState());
+
     fakeDetailMoviesBloc = FakeDetailMoviesBloc();
     registerFallbackValue(FakeDetailMoviesEvent());
     registerFallbackValue(FakeDetailMoviesState());
@@ -90,6 +105,16 @@ void main() {
     registerFallbackValue(FakeRecommendationMoviesEvent());
     registerFallbackValue(FakeRecommendationMoviesState());
   });
+  Widget _makeTestableWidgetNowPlaying(Widget body) {
+    return BlocProvider<NowPlayingMoviesBloc>(
+      create: (_) => fakeNowPlayingBloc,
+      child: MaterialApp(
+        home: Scaffold(
+          body: body,
+        ),
+      ),
+    );
+  }
 
   Widget _makeTestableWidget(Widget body) {
     return BlocProvider<TopRatedMoviesBloc>(
@@ -270,5 +295,45 @@ void main() {
 
     expect(find.byType(SnackBar), findsOneWidget);
     expect(find.text('Added to Watchlist'), findsOneWidget);
+  });
+
+  testWidgets('Page should display center progress bar when loading',
+      (WidgetTester tester) async {
+    when(() => fakeNowPlayingBloc.state).thenReturn(Loading());
+
+    final progressBarFinder = find.byType(CircularProgressIndicator);
+    final centerFinder = find.byType(Center);
+
+    await tester
+        .pumpWidget(_makeTestableWidgetNowPlaying(NowPlayingMoviePage()));
+
+    expect(centerFinder, findsOneWidget);
+    expect(progressBarFinder, findsOneWidget);
+  });
+
+  testWidgets('Page should display ListView when data is loaded',
+      (WidgetTester tester) async {
+    when(() => fakeNowPlayingBloc.state).thenReturn(HasData(testMovieList));
+
+    final listViewFinder = find.byType(ListView);
+
+    await tester
+        .pumpWidget(_makeTestableWidgetNowPlaying(NowPlayingMoviePage()));
+
+    expect(listViewFinder, findsOneWidget);
+  });
+
+  testWidgets('Page should display text with message when Error',
+      (WidgetTester tester) async {
+    const errorMessage = 'error message';
+    when(() => fakeNowPlayingBloc.state).thenReturn(const Error(errorMessage));
+
+    final textFinder = find.byKey(const Key('error_message'));
+
+    await tester
+        .pumpWidget(_makeTestableWidgetNowPlaying(NowPlayingMoviePage()));
+    await tester.pump();
+
+    expect(textFinder, findsOneWidget);
   });
 }
